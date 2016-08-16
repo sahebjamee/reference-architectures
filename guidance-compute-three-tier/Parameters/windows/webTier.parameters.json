@@ -1,0 +1,108 @@
+﻿{
+  "$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "loadBalancerSettings": {
+      "value": {
+        "name": "app1-web-lb",
+        "frontendIPConfigurations": [
+          {
+            "name": "lbfe1",
+            "loadBalancerType": "public",
+            "internalLoadBalancerSettings": {
+              "privateIPAddress": "10.0.0.250",
+              "subnetName": "app1-web-sn"
+            }
+          }
+        ],
+        "loadBalancingRules": [
+          {
+            "name": "lbr1",
+            "frontendPort": 80,
+            "backendPort": 80,
+            "protocol": "Tcp",
+            "backendPoolName": "lb-bep1",
+            "frontendIPConfigurationName": "lbfe1"
+          }
+        ],
+        "probes": [
+          {
+            "name": "lbp1",
+            "port": 80,
+            "protocol": "Http",
+            "requestPath": "/"
+          }
+        ],
+        "backendPools": [
+          {
+            "name": "lb-bep1",
+            "nicIndex": 0
+          }
+        ]
+      }
+    },
+    "virtualMachinesSettings": {
+      "value": {
+        "namePrefix": "a0",
+        "computerNamePrefix": "cn",
+        "size": "Standard_DS1",
+        "adminUsername": "testuser",
+        "adminPassword": "AweS0me@PW",
+        "osType": "windows",
+        "osAuthenticationType": "password",
+        "sshPublicKey": "",
+        "nics": [
+          {
+            "isPublic": "false",
+            "isPrimary": "true",
+            "subnetName": "app1-web-sn",
+            "privateIPAllocationMethod": "dynamic",
+            "enableIPForwarding": false,
+            "dnsServers": [ ]
+          }
+        ],
+        "imageReference": {
+          "publisher": "MicrosoftWindowsServer",
+          "offer": "WindowsServer",
+          "sku": "2012-R2-Datacenter",
+          "version": "latest"
+        },
+        "osDisk": {
+          "caching": "ReadWrite"
+        },
+        "dataDisks": {
+          "count": 1,
+          "properties": {
+            "diskSizeGB": 128,
+            "caching": "None",
+            "createOption": "Empty"
+          }
+        },
+        "availabilitySet": {
+          "useExistingAvailabilitySet": "No",
+          "name": "app1-web-as"
+        }
+      },
+      "metadata": {
+        "description": "Settings for Virtual Machines"
+      }
+    },
+    "virtualNetworkSettings": {
+      "value": {
+        "name": "app1-vnet",
+        "resourceGroup": "app1-dev-rg"
+      },
+      "metadata": {
+        "description": "Virtual network settings"
+      }
+    },
+    "buildingBlockSettings": {
+      "value": {
+        "storageAccountsCount": 1,
+        "vmCount": 3,
+        "vmStartIndex": 1
+      }
+    }
+  }
+}
+

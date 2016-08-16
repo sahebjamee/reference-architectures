@@ -1,0 +1,31 @@
+﻿{
+  "$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "virtualNetworkSettings": {
+      "value": {
+        "name": "ra-hybrid-er-vnet"
+      }
+    },
+    "virtualNetworkGatewaySettings": {
+      "value": {
+        "name": "ra-hybrid-er-vgw",
+        "gatewayType": "ExpressRoute",
+        "vpnType": "RouteBased",
+        "sku": "Standard"
+      }
+    },
+    "connectionSettings": {
+      "value": {
+        "name": "ra-hybrid-er-cn",
+        "connectionType": "ExpressRoute",
+        "virtualNetworkGateway1": {
+          "name": "ra-hybrid-er-vgw"
+        },
+        "expressRouteCircuit": {
+          "name": "ra-hybrid-er-erc"
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,25 @@
+﻿{
+  "$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "virtualNetworkSettings": {
+      "value": {
+        "name": "ra-hybrid-vpn-er-vnet",
+        "addressPrefixes": [
+          "10.20.0.0/16"
+        ],
+        "subnets": [
+          {
+            "name": "GatewaySubnet",
+            "addressPrefix": "10.20.255.224/27"
+          },
+          {
+            "name": "ra-hybrid-vpn-er-sn",
+            "addressPrefix": "10.20.1.0/24"
+          }
+        ],
+        "dnsServers": [ ]
+      }
+    }
+  }
+}

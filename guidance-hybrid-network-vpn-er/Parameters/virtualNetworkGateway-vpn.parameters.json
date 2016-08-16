@@ -1,0 +1,34 @@
+﻿{
+  "$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "virtualNetworkSettings": {
+      "value": {
+        "name": "ra-hybrid-vpn-er-vnet"
+      }
+    },
+    "virtualNetworkGatewaySettings": {
+      "value": {
+        "name": "ra-hybrid-vpn-vgw",
+        "gatewayType": "Vpn",
+        "vpnType": "RouteBased",
+        "sku": "Standard"
+      }
+    },
+    "connectionSettings": {
+      "value": {
+        "name": "ra-hybrid-vpn-cn",
+        "connectionType": "IPsec",
+        "sharedKey": "123secret",
+        "virtualNetworkGateway1": {
+          "name": "ra-hybrid-vpn-vgw"
+        },
+        "localNetworkGateway": {
+          "name": "ra-hybrid-vpn-lgw",
+          "ipAddress": "40.50.60.70",
+          "addressPrefixes": [ "192.168.0.0/16" ]
+        }
+      }
+    }
+  }
+}

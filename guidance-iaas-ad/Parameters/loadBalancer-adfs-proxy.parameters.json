@@ -1,0 +1,113 @@
+﻿{
+  "$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "loadBalancerSettings": {
+      "value": {
+        "name": "adfs-proxy-lb",
+        "frontendIPConfigurations": [
+          {
+            "name": "lbfe1",
+            "loadBalancerType": "internal",
+            "internalLoadBalancerSettings": {
+              "privateIPAddress": "10.0.255.158",
+              "subnetName": "adfs-proxy-sn"
+            }
+          }
+        ],
+        "loadBalancingRules": [
+          {
+            "name": "http-rule",
+            "frontendPort": 80,
+            "backendPort": 80,
+            "protocol": "Tcp",
+            "backendPoolName": "lb-bep1",
+            "frontendIPConfigurationName": "lbfe1"
+          },
+          {
+            "name": "https-rule",
+            "frontendPort": 443,
+            "backendPort": 443,
+            "protocol": "Tcp",
+            "backendPoolName": "lb-bep1",
+            "frontendIPConfigurationName": "lbfe1"
+          }
+        ],
+        "probes": [
+          {
+            "name": "http-probe",
+            "port": 80,
+            "protocol": "Http",
+            "requestPath": "/"
+          },
+          {
+            "name": "https-probe",
+            "port": 443,
+            "protocol": "Http",
+            "requestPath": "/"
+          }
+        ],
+        "backendPools": [
+          {
+            "name": "lb-bep1",
+            "nicIndex": 0
+          }
+        ],
+        "inboundNatRules": [ ]
+      }
+    },
+    "virtualMachinesSettings": {
+      "value": {
+        "namePrefix": "ra-ad-adfs-proxy",
+        "computerNamePrefix": "adfsp",
+        "size": "Standard_DS2",
+        "osType": "windows",
+        "adminUsername": "testuser",
+        "adminPassword": "AweS0me@PW",
+        "osAuthenticationType": "password",
+        "nics": [
+          {
+            "isPublic": "false",
+            "subnetName": "adfs-proxy-sn",
+            "privateIPAllocationMethod": "static",
+            "startingIPAddress": "10.0.255.156",
+            "enableIPForwarding": false,
+            "dnsServers": [
+            ],
+            "isPrimary": "true"
+          }
+        ],
+        "imageReference": {
+          "publisher": "MicrosoftWindowsServer",
+          "offer": "WindowsServer",
+          "sku": "2012-R2-Datacenter",
+          "version": "latest"
+        },
+        "dataDisks": {
+          "count": 0,
+          "properties": { }
+        },
+        "osDisk": {
+          "caching": "ReadWrite"
+        },
+        "availabilitySet": {
+          "useExistingAvailabilitySet": "No",
+          "name": "adfs-proxy-as"
+        }
+      }
+    },
+    "virtualNetworkSettings": {
+      "value": {
+        "name": "ra-ad-vnet",
+        "resourceGroup": "ra-ad-rg"
+      }
+    },
+    "buildingBlockSettings": {
+      "value": {
+        "storageAccountsCount": 2,
+        "vmCount": 2,
+        "vmStartIndex": 0
+      }
+    }
+  }
+}

@@ -1,0 +1,88 @@
+﻿{
+  "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "osType": {
+      "type": "string",
+      "allowedValues": [
+        "windows",
+        "linux"
+      ],
+      "defaultValue": "linux",
+      "metadata": {
+        "description": "Relative path decider for the template parameters."
+      }
+    }
+  },
+  "variables": {
+    "templateRootUri": "https://raw.githubusercontent.com/mspnp/arm-building-blocks/master/",
+    "templates": {
+      "deployment": {
+        "lb": "[concat(variables('templateRootUri'), 'ARMBuildingBlocks/Templates/buildingBlocks/loadBalancer-backend-n-vm/azuredeploy.json')]",
+        "vnet": "[concat(variables('templateRootUri'), 'ARMBuildingBlocks/Templates/buildingBlocks/vnet-n-subnet/azuredeploy.json')]",
+        "nsg": "[concat(variables('templateRootUri'), 'ARMBuildingBlocks/Templates/buildingBlocks/networkSecurityGroups/azuredeploy.json')]"
+      },
+      "parameter": {
+        "vnet": "[concat(variables('templateRootUri'), 'guidance-compute-multi-vm/Parameters/', parameters('osType'), '/virtualNetwork.parameters.json')]",
+        "nsg": "[concat(variables('templateRootUri'), 'guidance-compute-multi-vm/Parameters/', parameters('osType'), '/networkSecurityGroups.parameters.json')]",
+        "lb": "[concat(variables('templateRootUri'), 'guidance-compute-multi-vm/Parameters/', parameters('osType'), '/virtualMachine.parameters.json')]"
+      }
+    }
+  },
+  "resources": [
+    {
+      "type": "Microsoft.Resources/deployments",
+      "apiVersion": "2015-01-01",
+      "name": "ra-multi-vm-vnet-deployment",
+      "properties": {
+        "mode": "Incremental",
+        "templateLink": {
+          "uri": "[variables('templates').deployment.vnet]"
+        },
+        "parametersLink": {
+          "uri": "[variables('templates').parameter.vnet]",
+          "contentVersion": "1.0.0.0"
+        }
+      }
+    },
+    {
+      "type": "Microsoft.Resources/deployments",
+      "apiVersion": "2015-01-01",
+      "name": "ra-multi-vm-deployment",
+      "dependsOn": [
+        "ra-multi-vm-vnet-deployment"
+      ],
+      "properties": {
+        "mode": "Incremental",
+        "templateLink": {
+          "uri": "[variables('templates').deployment.lb]"
+        },
+        "parametersLink": {
+          "uri": "[variables('templates').parameter.lb]",
+          "contentVersion": "1.0.0.0"
+        }
+      }
+    },
+    {
+      "type": "Microsoft.Resources/deployments",
+      "apiVersion": "2015-01-01",
+      "name": "ra-multi-vm-nsg-deployment",
+      "dependsOn": [
+        "ra-multi-vm-deployment"
+      ],
+      "properties": {
+        "mode": "Incremental",
+        "templateLink": {
+          "uri": "[variables('templates').deployment.nsg]"
+        },
+        "parametersLink": {
+          "uri": "[variables('templates').parameter.nsg]",
+          "contentVersion": "1.0.0.0"
+        }
+      }
+    }
+  ],
+  "outputs": {
+  }
+}
+

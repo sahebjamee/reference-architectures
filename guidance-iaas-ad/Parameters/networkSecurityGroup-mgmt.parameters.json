@@ -1,0 +1,81 @@
+﻿{
+  "$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "virtualNetworkSettings": {
+      "value": {
+        "name": "ra-ad-vnet",
+        "resourceGroup": "ra-ad-rg"
+      }
+    },
+    "networkSecurityGroupsSettings": {
+      "value": [
+        {
+          "name": "mgmt-nsg",
+          "subnets": [
+            "mgmt-sn"
+          ],
+          "networkInterfaces": [
+          ],
+          "securityRules": [
+            {
+              "name": "on-prem-rdp-allow",
+              "direction": "Inbound",
+              "priority": 1000,
+              "sourceAddressPrefix": "192.168.0.0/16",
+              "destinationAddressPrefix": "*",
+              "sourcePortRange": "*",
+              "destinationPortRange": "3389",
+              "access": "Allow",
+              "protocol": "*"
+            },
+            {
+              "name": "on-prem-ssh-allow",
+              "direction": "Inbound",
+              "priority": 1000,
+              "sourceAddressPrefix": "192.168.0.0/16",
+              "destinationAddressPrefix": "*",
+              "sourcePortRange": "*",
+              "destinationPortRange": "22",
+              "access": "Allow",
+              "protocol": "*"
+            },
+            {
+              "name": "gateway-allow",
+              "direction": "Inbound",
+              "priority": 1000,
+              "sourceAddressPrefix": "10.0.255.224/27",
+              "destinationAddressPrefix": "*",
+              "sourcePortRange": "*",
+              "destinationPortRange": "*",
+              "access": "Allow",
+              "protocol": "*"
+            },
+            {
+              "name": "self-allow",
+              "direction": "Inbound",
+              "priority": 1000,
+              "sourceAddressPrefix": "10.0.0.128/25",
+              "destinationAddressPrefix": "*",
+              "sourcePortRange": "*",
+              "destinationPortRange": "*",
+              "access": "Allow",
+              "protocol": "*"
+            },
+            {
+              "name": "vnet-deny",
+              "direction": "Inbound",
+              "priority": 1000,
+              "sourceAddressPrefix": "*",
+              "destinationAddressPrefix": "*",
+              "sourcePortRange": "*",
+              "destinationPortRange": "*",
+              "access": "Deny",
+              "protocol": "*"
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

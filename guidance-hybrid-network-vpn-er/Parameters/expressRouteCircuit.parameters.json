@@ -1,0 +1,22 @@
+﻿{
+  "$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "deploymentContext": {
+      "value": {
+        "parentTemplateUniqueString": ""
+      }
+    },
+    "expressRouteCircuitSettings": {
+      "value": {
+        "name": "ra-hybrid-vpn-er-erc",
+        "skuTier": "Premium",
+        "skuFamily": "UnlimitedData",
+        "serviceProviderName": "Equinix",
+        "peeringLocation": "Silicon Valley",
+        "bandwidthInMbps": 50,
+        "allowClassicOperations": false
+      }
+    }
+  }
+}

@@ -1,0 +1,37 @@
+﻿{
+  "$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "virtualNetworkSettings": {
+      "value": {
+        "name": "ra-single-vm-vnet",
+        "resourceGroup": "ra-single-vm-rg"
+      }
+    },
+    "networkSecurityGroupsSettings": {
+      "value": [
+        {
+          "name": "ra-single-vm-nsg",
+          "subnets": [
+            "ra-single-vm-sn"
+          ],
+          "networkInterfaces": [
+          ],
+          "securityRules": [
+            {
+              "name": "default-allow-ssh",
+              "direction": "Inbound",
+              "priority": 1000,
+              "sourceAddressPrefix": "*",
+              "destinationAddressPrefix": "*",
+              "sourcePortRange": "*",
+              "destinationPortRange": "22",
+              "access": "Allow",
+              "protocol": "Tcp"
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

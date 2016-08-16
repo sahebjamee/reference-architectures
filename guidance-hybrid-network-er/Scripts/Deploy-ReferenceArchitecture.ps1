@@ -1,0 +1,63 @@
+﻿#
+# Deploy_ReferenceArchitecture.ps1
+#
+param(
+  [Parameter(Mandatory=$true)]
+  $SubscriptionId,
+  [Parameter(Mandatory=$false)]
+  $Location = "Central US",
+  [Parameter(Mandatory=$true)]
+  [ValidateSet("Circuit", "Network")]
+  $Mode
+)
+
+$ErrorActionPreference = "Stop"
+
+$templateRootUriString = $env:TEMPLATE_ROOT_URI
+if ($templateRootUriString -eq $null) {
+  $templateRootUriString = "https://raw.githubusercontent.com/mspnp/arm-building-blocks/master/"
+}
+
+if (![System.Uri]::IsWellFormedUriString($templateRootUriString, [System.UriKind]::Absolute)) {
+  throw "Invalid value for TEMPLATE_ROOT_URI: $env:TEMPLATE_ROOT_URI"
+}
+
+Write-Host
+Write-Host "Using $templateRootUriString to locate templates"
+Write-Host
+
+$templateRootUri = New-Object System.Uri -ArgumentList @($templateRootUriString)
+
+$expressRouteCircuitTemplate = New-Object System.Uri -ArgumentList @($templateRootUri, "ARMBuildingBlocks/Templates/resources/Microsoft.Network/expressRouteCircuits/expressRouteCircuit.json")
+$expressRouteCircuitParametersFile = [System.IO.Path]::Combine($PSScriptRoot, "..\Parameters\expressRouteCircuit.parameters.json")
+
+$virtualNetworkTemplate = New-Object System.Uri -ArgumentList @($templateRootUri, "ARMBuildingBlocks/Templates/buildingBlocks/vnet-n-subnet/azuredeploy.json")
+$virtualNetworkParametersFile = [System.IO.Path]::Combine($PSScriptRoot, "..\Parameters\virtualNetwork.parameters.json")
+
+$virtualNetworkGatewayTemplate = New-Object System.Uri -ArgumentList @($templateRootUri, "ARMBuildingBlocks/Templates/buildingBlocks/vpn-gateway-vpn-connection/azuredeploy.json")
+$virtualNetworkGatewayParametersFile = [System.IO.Path]::Combine($PSScriptRoot, "..\Parameters\virtualNetworkGateway.parameters.json")
+
+$resourceGroupName = "ra-hybrid-er-rg"
+# Login to Azure and select your subscription
+Login-AzureRmAccount -SubscriptionId $SubscriptionId | Out-Null
+
+$resourceGroup = Get-AzureRmResourceGroup -Name $resourceGroupName -Location $Location -ErrorAction SilentlyContinue
+if ($resourceGroup -eq $null) {
+  # Create the resource group
+  $resourceGroup = New-AzureRmResourceGroup -Name $resourceGroupName -Location $Location
+}
+
+if ($Mode -eq "Circuit") {
+  Write-Host "Creating ExpressRoute circuit..."
+  New-AzureRmResourceGroupDeployment -Name "ra-hybrid-er-circuit-deployment" -ResourceGroupName $resourceGroup.ResourceGroupName `
+    -TemplateUri $expressRouteCircuitTemplate.AbsoluteUri -TemplateParameterFile $expressRouteCircuitParametersFile
+}
+elseif ($Mode -eq "Network") {
+  Write-Host "Deploying virtual network..."
+  New-AzureRmResourceGroupDeployment -Name "ra-hybrid-er-vnet-deployment" -ResourceGroupName $resourceGroup.ResourceGroupName `
+    -TemplateUri $virtualNetworkTemplate.AbsoluteUri -TemplateParameterFile $virtualNetworkParametersFile
+
+  Write-Host "Deploying virtual network gateway..."
+  New-AzureRmResourceGroupDeployment -Name "ra-hybrid-er-gateway-deployment" -ResourceGroupName $resourceGroup.ResourceGroupName `
+    -TemplateUri $virtualNetworkGatewayTemplate.AbsoluteUri -TemplateParameterFile $virtualNetworkGatewayParametersFile
+}

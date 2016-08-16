@@ -1,0 +1,41 @@
+﻿{
+  "$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "templateRootUri": {
+      "type": "string",
+      "defaultValue": "https://raw.githubusercontent.com/mspnp/arm-building-blocks/master/",
+      "metadata": {
+        "description": "Root path for templates"
+      }
+    }
+  },
+  "variables": {
+    "templates": {
+      "deployment": {
+        "expressRouteCircuit": "[uri(parameters('templateRootUri'), 'ARMBuildingBlocks/Templates/resources/Microsoft.Network/expressRouteCircuits/expressRouteCircuit.json')]"
+      },
+      "parameter": {
+        "expressRouteCircuit": "[uri(parameters('templateRootUri'), 'guidance-hybrid-network-er/Parameters/expressRouteCircuit.parameters.json')]"
+      }
+    }
+  },
+  "resources": [
+    {
+      "type": "Microsoft.Resources/deployments",
+      "apiVersion": "2015-01-01",
+      "name": "ra-hybrid-er-circuit-deployment",
+      "properties": {
+        "mode": "Incremental",
+        "templateLink": {
+          "uri": "[variables('templates').deployment.expressRouteCircuit]"
+        },
+        "parametersLink": {
+          "uri": "[variables('templates').parameter.expressRouteCircuit]"
+        }
+      }
+    }
+  ],
+  "outputs": {
+  }
+}

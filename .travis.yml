@@ -1,0 +1,31 @@
+language: generic
+sudo: required
+dist: trusty
+
+env:
+  global:
+  - secure: mpkqppDHKlLrvHAOvLzIXItREWKugA0h8HH/zlEu017hGTvIiafIrWswrC9fQcPnEnq87hkU/PdudMMw0oWkFReamqQj7d2lY//XJwJfIc5UocVyactQeBDcCIvfbUKdjk+WvlW7K0aSTjTGLtz8WqKYFnF1hyvoIxjjRAyR2O8R4OMxkDlmPDVewjq1qONqWb+jD7/m84IzXw4KLap4KPhQSyF98UVE5v3dUT+jUNMYgq5CPdb3wFV7loplGIka05VS8J17w2pLmKS8+qJqcH5zlqfpz1OwMoFHc8Yq8nFCA/ZYyR9r56acBf8Py6gmT7ISOZE7xZUHowIett7u/bS0pbT2+TxwX/1NXtSQd+vH+ReVDg4vOXFxqyacx4fNv1IOqCLfLTjJ5slylN2WHWgqA77IaO1gmkH12awL5EsJ9b2Yq1xVDuEvmHvdbOaJ1jioXKEOWEJ1ChAbdoY2ecJq81aPphU9JXBB05CeAiBR578UqeB3ZyDj3I9iIBtypJ/IdSBWvb6/TrCW31kD1bBI7qmOw7pBcvpKF6zpRxTGvzo6SFFUh0Daf0YfCh6H8D3x5/tbqzihCpeSz6zo3OJgTCTTYhAxaXY6zRv1j9H0O7I51MKoY7aHTiqBzfOKfNvUhrLw0y6cFsqivkUuJmapjG4u0fbhwN9iqdineMs=
+  - secure: NdQF3ywJBna3Iup/PaMS/+YGhTowTiKrWfR+E/dPw6upZhN5jlJU0dwlN5EEHD+Tb7vWojM7jQREK78+QW6WiuUGOX7tmACPtr0sp+wHld0YO3yrhDh4Z7pVEnSfwLZVcGG6UEHuT1n3VfChI0kmMl5PhpfJmYCvhWuHXEeNZiwezlbY0lM9Jv28xuWZ7DVhriSGWuzrMn6886uGiVDIfkVmjWuz+LXw+MLyAKqpJZKpY+noHShgCxXOkLXeu2hQ6GKOA28cbcd1Fha8X8Es+vXBNEt/JID7s/YdxomaJmOQYqPNEzEolKS7ix4KV7uurpyFsGPteFYwtLYvvqW0Lvl4QSD54BBfJP3bWrPTBWI3WS0j8TOuRGknWCitf3o81LvtC2SBr/0AdspXcR8Sv1Wv74vNKzncMIYEaXNGIgTmpUt6k6Gs9Xr9Eo1oP7rLBV4K0Sql4M6GJLUok64xs1HaoGZTU4g3cnJZlOR/GqPNSicq7SlCVyJaUMSlz356u6E65suoJOqBAAifDeMkvBFA/qB+agCA/91twCPMxuuRys9AB7OVuExtS3CHAOP4a+ZzLHFvjEeB/8he/T1FpCtoS6Lz8+q33sc6M8uKrmTEYYjlAwQME5CVJ+y6oaqUQgdnpQAgUtUIyVIaIpd9ogLJ0jaiigIh0Dzc4W5mEqc=
+  - secure: oNFI61TDzh+wOfogvJxAw7yuYPYg16e/PRM1ZgzBB+K/J2msiTY7qPxpqHf0jceMzAC9l/+XsgW05QBOl6tiwsJcs4mhlBce0z5ppuJK3qr2Q7yamqMa9FhmZv2Jw816zMSWr5F/60IHL100kK4Hbvq5frqwdBQj04wB7TmRhXzWrT6ymHLCKJD/OPKqhp0x7DZKQ4y/6giWTgCLY4Ypf8rThVBbUmCqsn45KSvWTEsOXft3+/bcR27ms9CgpL0zHHnraGgBHnRlrEePnzfEVdEM5FJr5SRagQWESC0kdO3krO2iJR7M/NeaH8vx4ymXyIwgMnTBy174ozdi1XkefRTPDtHxtC9qmqP2si7Ck5qypbd/2+SriRRlsTTr+Z/l54D/MfSWBxOZcfKblop/p4UU+NmgX7zOFjTIGB8Kq22UIlDG7H4DzdoaUV4qnWrUGHd3Zo6D+3H+D0sEEqnFjRVUnawhJB93DZZOUnAqvxzg1o+P/gDZ6zWEXWE4tri/XDANQo+QL7OD49qCgr0PTT+c6MUL126ek629QFidEtnltQbpN/yecP3+Xcq0AT1IN69nOSnw65MrZRBNqLuDJutiyJE2sogsFCAVJ6g0239rPmNpgqHMpMGmZ5QSBgfmofA3OZGsrv0PHBPcI1bmyWbF22ZjGJqtotPhFLb7ynM=
+  - secure: P2GInKK0wBAT1hsfud92hlPk2xFMRMeb+uf6szAJkNJ/lAY3MY3qeXyjGanDJnVKgk+H6tLA0ZoNtnrtbASJEH8iRl47Ow1nHYYcpxkIDeYC/h96tpubFiMQ9gt1BZ6aez3v1VkjwBbg55aQvSHecCa9BglY+vINt8SGq35ZrqOHKnO1sR+7a6XTte2xKlR9JiXLt97eo1vQGEOdH3Zwg5L4ZGbkjBqrZtg9LsthFgPNIOm8HPZiTkelOZ1TXSY1RwviDCLOnTDPkMaNyzmVZy2kCqQSCOzOCoAbJBdgvmrfKxJgJ4cMrVx9XmkFO6hfaQj6i1CSbsm/lb5xo7c7jvjdB9E3O2SVd5IBCaqIuSz+jHbkinX0FgzZSsvOx8d4CQlLJ0MJOXpkMWZ82SP/63UdDAXjSC8TAryL2WU9c9KTEYWRoRME0a+tbAURUlSwEFeZ9ucMNalj2hXCzevrRL1Pepz9BPeWDE5BSMIs0dN0OQu0Ynb3aHHe+5VZV0V8MYl/ZrzbkRZM+lW8n8FkzkxnuQ6naWiiDetOa2h5d1DuZDoF6V3fsDFueWZvj5y4bNwBPLMMn6Posos1DC37S7ZQokjFr8HJhSWh7b9/bOApqH2OiO4BYdBo7mncU4MWIwm0OMFYTE4Cl0t6huphUzfWL+2mkqTAaLf8UYYO+vY=
+
+branches:
+  only:
+  - master
+
+before_install:
+- curl -sL https://deb.nodesource.com/setup_4.x | sudo -E bash -
+- sudo apt-get install -y nodejs
+- sudo npm install -g azure-cli
+
+script:
+- chmod +x ./test/test-setup.sh
+- chmod +x ./test/execute-ra.sh
+- ./test/test-setup.sh
+- ./test/execute-ra.sh ra-single-vm guidance-compute-single-vm/Scripts/deploy-reference-architecture.sh --subscription $S --os-type linux
+- azure group delete --name ra-single-vm-rg --subscription $S --quiet
+- ./test/execute-ra.sh ra-multi-vm guidance-compute-multi-vm/Scripts/deploy-reference-architecture.sh --subscription $S --os-type linux
+- azure group delete --name ra-multi-vm-rg --subscription $S --quiet
+- ./test/execute-ra.sh ra-hybrid-vpn guidance-hybrid-network-vpn/Scripts/deploy-reference-architecture.sh --subscription $S
+- azure group delete --name ra-hybrid-vpn-rg --subscription $S --quiet
+
