@@ -1,7 +1,14 @@
 #!/bin/bash
 
-RESOURCE_GROUP_NAME="app1-dev-rg"
+RESOURCE_GROUP_NAME="ra-multi-vm-rg"
 LOCATION="centralus"
+
+TEMPLATE_ROOT_URI=${TEMPLATE_ROOT_URI:="https://raw.githubusercontent.com/mspnp/arm-building-blocks/master/"}
+# Make sure we have a trailing slash
+[[ "${TEMPLATE_ROOT_URI}" != */ ]] && TEMPLATE_ROOT_URI="${TEMPLATE_ROOT_URI}/"
+
+# For validating HTTP URIs only
+URI_REGEX="^((?:https?://(?:(?:[a-zA-Z0-9$.+!*(),;?&=_-]|(?:%[a-fA-F0-9]{2})){1,64}(?::(?:[a-zA-Z0-9$.+!*(),;?&=_-]|(?:%[a-fA-F0-9]{2})){1,25})?@)?)?(?:(([a-zA-Z0-9\x00A0-\xD7FF\xF900-\xFDCF\xFDF0-\xFFEF]([a-zA-Z0-9\x00A0-\xD7FF\xF900-\xFDCF\xFDF0-\xFFEF-]{0,61}[a-zA-Z0-9\x00A0-\xD7FF\xF900-\xFDCF\xFDF0-\xFFEF]){0,1}\.)+[a-zA-Z\x00A0-\xD7FF\xF900-\xFDCF\xFDF0-\xFFEF]{2,63}|((25[0-5]|2[0-4][0-9]|[0-1][0-9]{2}|[1-9][0-9]|[1-9])\.(25[0-5]|2[0-4][0-9]|[0-1][0-9]{2}|[1-9][0-9]|[1-9]|0)\.(25[0-5]|2[0-4][0-9]|[0-1][0-9]{2}|[1-9][0-9]|[1-9]|0)\.(25[0-5]|2[0-4][0-9]|[0-1][0-9]{2}|[1-9][0-9]|[0-9]))))(?::\d{1,5})?)(/(?:(?:[a-zA-Z0-9\x00A0-\xD7FF\xF900-\xFDCF\xFDF0-\xFFEF;/?:@&=#~.+!*(),_-])|(?:%[a-fA-F0-9]{2}))*)?(?:\b|$)$"
 
 validate() {
     for i in "${@:2}"; do
@@ -30,10 +37,12 @@ showErrorAndUsage() {
     echo "  error:  $1"
     echo
   fi
+
   echo "  usage:  $(basename ${0}) [options]"
   echo "  options:"
-  echo "    -s, --subscription <subscription-id>"
+  echo "    -l, --location <location>"
   echo "    -o, --os-type <windows | linux>"
+  echo "    -s, --subscription <subscription-id>"
   echo
   exit 1
 }
@@ -62,8 +71,7 @@ do
       shift
       ;;
     *)
-      echo Unknown option "$1"
-      exit 1
+      showErrorAndUsage "Unknown option: $1"
     ;;
   esac
   shift
@@ -84,19 +92,26 @@ then
   showErrorAndUsage "Location must be provided"
 fi
 
+if grep -P -v $URI_REGEX <<< $TEMPLATE_ROOT_URI > /dev/null
+then
+  showErrorAndUsage "Invalid value for TEMPLATE_ROOT_URI: ${TEMPLATE_ROOT_URI}"
+fi
+
+echo
+echo "Using ${TEMPLATE_ROOT_URI} to locate templates"
+echo
+
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
-TEMPLATE_ROOT_URI="https://raw.githubusercontent.com/mspnp/arm-building-blocks/master/ARMBuildingBlocks/Templates/"
-
-VIRTUAL_NETWORK_TEMPLATE_URI="${TEMPLATE_ROOT_URI}buildingBlocks/vnet-n-subnet/azuredeploy.json"
+VIRTUAL_NETWORK_TEMPLATE_URI="${TEMPLATE_ROOT_URI}ARMBuildingBlocks/Templates/buildingBlocks/vnet-n-subnet/azuredeploy.json"
 VIRTUAL_NETWORK_PARAMETERS_PATH="${SCRIPT_DIR}/../Parameters/${OS_TYPE}/virtualNetwork.parameters.json"
 VIRTUAL_NETWORK_DEPLOYMENT_NAME="ra-multi-vm-vnet-deployment"
 
-LOAD_BALANCER_TEMPLATE_URI="${TEMPLATE_ROOT_URI}buildingBlocks/loadBalancer-backend-n-vm/azuredeploy.json"
+LOAD_BALANCER_TEMPLATE_URI="${TEMPLATE_ROOT_URI}ARMBuildingBlocks/Templates/buildingBlocks/loadBalancer-backend-n-vm/azuredeploy.json"
 LOAD_BALANCER_PARAMETERS_PATH="${SCRIPT_DIR}/../Parameters/${OS_TYPE}/virtualMachine.parameters.json"
 LOAD_BALANCER_DEPLOYMENT_NAME="ra-multi-vm-deployment"
 
-NETWORK_SECURITY_GROUP_TEMPLATE_URI="${TEMPLATE_ROOT_URI}buildingBlocks/networkSecurityGroups/azuredeploy.json"
+NETWORK_SECURITY_GROUP_TEMPLATE_URI="${TEMPLATE_ROOT_URI}ARMBuildingBlocks/Templates/buildingBlocks/networkSecurityGroups/azuredeploy.json"
 NETWORK_SECURITY_GROUP_PARAMETERS_PATH="${SCRIPT_DIR}/../Parameters/${OS_TYPE}/networkSecurityGroups.parameters.json"
 NETWORK_SECURITY_GROUP_DEPLOYMENT_NAME="ra-multi-vm-nsg-deployment"
 

@@ -8,10 +8,25 @@ param(
   $Location = "Central US",
   [Parameter(Mandatory=$false)]
   [ValidateSet("Windows", "Linux")]
-  $OSType = "Linux"
+  $OSType = "Windows"
 )
 
-$templateRootUri = New-Object System.Uri -ArgumentList @("https://raw.githubusercontent.com/mspnp/arm-building-blocks/master/")
+$ErrorActionPreference = "Stop"
+
+$templateRootUriString = $env:TEMPLATE_ROOT_URI
+if ($templateRootUriString -eq $null) {
+  $templateRootUriString = "https://raw.githubusercontent.com/mspnp/arm-building-blocks/master/"
+}
+
+if (![System.Uri]::IsWellFormedUriString($templateRootUriString, [System.UriKind]::Absolute)) {
+  throw "Invalid value for TEMPLATE_ROOT_URI: $env:TEMPLATE_ROOT_URI"
+}
+
+Write-Host
+Write-Host "Using $templateRootUriString to locate templates"
+Write-Host
+
+$templateRootUri = New-Object System.Uri -ArgumentList @($templateRootUriString)
 $virtualNetworkTemplate = New-Object System.Uri -ArgumentList @($templateRootUri, "ARMBuildingBlocks/Templates/buildingBlocks/vnet-n-subnet/azuredeploy.json")
 $virtualMachineTemplate = New-Object System.Uri -ArgumentList @($templateRootUri, "ARMBuildingBlocks/Templates/buildingBlocks/loadBalancer-backend-n-vm/azuredeploy.json")
 $networkSecurityGroupTemplate = New-Object System.Uri -ArgumentList @($templateRootUri, "ARMBuildingBlocks/Templates/buildingBlocks/networkSecurityGroups/azuredeploy.json")
@@ -19,7 +34,7 @@ $virtualNetworkParametersFile = [System.IO.Path]::Combine($PSScriptRoot, "..\Par
 $virtualMachineParametersFile = [System.IO.Path]::Combine($PSScriptRoot, "..\Parameters", $OSType.ToLower(), "virtualMachine.parameters.json")
 $networkSecurityGroupParametersFile = [System.IO.Path]::Combine($PSScriptRoot, "..\Parameters", $OSType.ToLower(), "networkSecurityGroups.parameters.json")
 
-$resourceGroupName = "app1-dev-rg"
+$resourceGroupName = "ra-multi-vm-rg"
 # Login to Azure and select your subscription
 Login-AzureRmAccount -SubscriptionId $SubscriptionId | Out-Null
 

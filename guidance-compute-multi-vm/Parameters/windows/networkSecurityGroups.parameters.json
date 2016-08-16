@@ -4,16 +4,16 @@
   "parameters": {
     "virtualNetworkSettings": {
       "value": {
-        "name": "app1-vnet",
-        "resourceGroup": "app1-dev-rg"
+        "name": "ra-vnet",
+        "resourceGroup": "ra-multi-vm-rg"
       }
     },
     "networkSecurityGroupsSettings": {
       "value": [
         {
-          "name": "app1-nsg",
+          "name": "ra-nsg",
           "subnets": [
-            "app1-subnet"
+            "ra-subnet"
           ],
           "networkInterfaces": [
           ],
