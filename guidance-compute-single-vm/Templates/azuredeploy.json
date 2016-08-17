@@ -4,9 +4,16 @@
   "parameters": {
     "templateRootUri": {
       "type": "string",
-      "defaultValue": "https://raw.githubusercontent.com/mspnp/arm-building-blocks/master/",
+      "defaultValue": "https://raw.githubusercontent.com/mspnp/template-building-blocks/master/",
       "metadata": {
         "description": "Root path for templates"
+      }
+    },
+    "parameterRootUri": {
+      "type": "string",
+      "defaultValue": "https://raw.githubusercontent.com/mspnp/reference-architectures/master/",
+      "metadata": {
+        "decription": "Root path for parameters"
       }
     },
     "osType": {
@@ -24,14 +31,14 @@
   "variables": {
     "templates": {
       "deployment": {
-        "virtualNetwork": "[uri(parameters('templateRootUri'), 'ARMBuildingBlocks/Templates/buildingBlocks/vnet-n-subnet/azuredeploy.json')]",
-        "virtualMachine": "[uri(parameters('templateRootUri'), 'ARMBuildingBlocks/Templates/buildingBlocks/multi-vm-n-nic-m-storage/azuredeploy.json')]",
-        "networkSecurityGroup": "[uri(parameters('templateRootUri'), 'ARMBuildingBlocks/Templates/buildingBlocks/networkSecurityGroups/azuredeploy.json')]"
+        "virtualNetwork": "[uri(parameters('templateRootUri'), 'templates/buildingBlocks/vnet-n-subnet/azuredeploy.json')]",
+        "virtualMachine": "[uri(parameters('templateRootUri'), 'templates/buildingBlocks/multi-vm-n-nic-m-storage/azuredeploy.json')]",
+        "networkSecurityGroup": "[uri(parameters('templateRootUri'), 'templates/buildingBlocks/networkSecurityGroups/azuredeploy.json')]"
       },
       "parameter": {
-        "virtualNetwork": "[uri(parameters('templateRootUri'), concat('guidance-compute-single-vm/Parameters/', parameters('osType'), '/virtualNetwork.parameters.json'))]",
-        "virtualMachine": "[uri(parameters('templateRootUri'), concat('guidance-compute-single-vm/Parameters/', parameters('osType'), '/virtualMachine.parameters.json'))]",
-        "networkSecurityGroup": "[uri(parameters('templateRootUri'), concat('guidance-compute-single-vm/Parameters/', parameters('osType'), '/networkSecurityGroups.parameters.json'))]"
+        "virtualNetwork": "[uri(parameters('parameterRootUri'), concat('guidance-compute-single-vm/Parameters/', parameters('osType'), '/virtualNetwork.parameters.json'))]",
+        "virtualMachine": "[uri(parameters('parameterRootUri'), concat('guidance-compute-single-vm/Parameters/', parameters('osType'), '/virtualMachine.parameters.json'))]",
+        "networkSecurityGroup": "[uri(parameters('parameterRootUri'), concat('guidance-compute-single-vm/Parameters/', parameters('osType'), '/networkSecurityGroups.parameters.json'))]"
       }
     }
   },

@@ -1,0 +1,64 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25123.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{151D2E53-A2C4-4D7D-83FE-D05416EBD58E}") = "guidance-compute-multi-vm", "guidance-compute-multi-vm\guidance-compute-multi-vm.deployproj", "{58119F1A-4CF6-46F9-AD16-444E3B873F03}"
+EndProject
+Project("{151D2E53-A2C4-4D7D-83FE-D05416EBD58E}") = "guidance-compute-single-vm", "guidance-compute-single-vm\guidance-compute-single-vm.deployproj", "{B7B33AE1-E56A-458D-93FB-D06DDB93CD7F}"
+EndProject
+Project("{151D2E53-A2C4-4D7D-83FE-D05416EBD58E}") = "guidance-compute-n-tier", "guidance-compute-n-tier\guidance-compute-n-tier.deployproj", "{37BD5438-1465-443B-8826-A112CCA2E409}"
+EndProject
+Project("{151D2E53-A2C4-4D7D-83FE-D05416EBD58E}") = "guidance-hybrid-network-er", "guidance-hybrid-network-er\guidance-hybrid-network-er.deployproj", "{334ED53A-1F21-48E3-BB52-1B96E4A49592}"
+EndProject
+Project("{151D2E53-A2C4-4D7D-83FE-D05416EBD58E}") = "guidance-hybrid-network-secure-vnet", "guidance-hybrid-network-secure-vnet\guidance-hybrid-network-secure-vnet.deployproj", "{5B5343CE-CAFF-42CF-893D-CABCC55858BB}"
+EndProject
+Project("{151D2E53-A2C4-4D7D-83FE-D05416EBD58E}") = "guidance-hybrid-network-vpn", "guidance-hybrid-network-vpn\guidance-hybrid-network-vpn.deployproj", "{832CB7C6-CECA-424E-A82A-FAA4C342FD85}"
+EndProject
+Project("{151D2E53-A2C4-4D7D-83FE-D05416EBD58E}") = "guidance-hybrid-network-vpn-er", "guidance-hybrid-network-vpn-er\guidance-hybrid-network-vpn-er.deployproj", "{CFEB9DA3-A1F6-495D-8027-D58CBE1BD4CD}"
+EndProject
+Project("{151D2E53-A2C4-4D7D-83FE-D05416EBD58E}") = "guidance-iaas-ad", "guidance-iaas-ad\guidance-iaas-ad.deployproj", "{AEBDAE84-0E70-4E7A-AD5F-2E05007F30A6}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{58119F1A-4CF6-46F9-AD16-444E3B873F03}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{58119F1A-4CF6-46F9-AD16-444E3B873F03}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{58119F1A-4CF6-46F9-AD16-444E3B873F03}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{58119F1A-4CF6-46F9-AD16-444E3B873F03}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B7B33AE1-E56A-458D-93FB-D06DDB93CD7F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B7B33AE1-E56A-458D-93FB-D06DDB93CD7F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B7B33AE1-E56A-458D-93FB-D06DDB93CD7F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B7B33AE1-E56A-458D-93FB-D06DDB93CD7F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{37BD5438-1465-443B-8826-A112CCA2E409}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{37BD5438-1465-443B-8826-A112CCA2E409}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{37BD5438-1465-443B-8826-A112CCA2E409}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{37BD5438-1465-443B-8826-A112CCA2E409}.Release|Any CPU.Build.0 = Release|Any CPU
+		{334ED53A-1F21-48E3-BB52-1B96E4A49592}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{334ED53A-1F21-48E3-BB52-1B96E4A49592}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{334ED53A-1F21-48E3-BB52-1B96E4A49592}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{334ED53A-1F21-48E3-BB52-1B96E4A49592}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5B5343CE-CAFF-42CF-893D-CABCC55858BB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5B5343CE-CAFF-42CF-893D-CABCC55858BB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5B5343CE-CAFF-42CF-893D-CABCC55858BB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5B5343CE-CAFF-42CF-893D-CABCC55858BB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{832CB7C6-CECA-424E-A82A-FAA4C342FD85}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{832CB7C6-CECA-424E-A82A-FAA4C342FD85}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{832CB7C6-CECA-424E-A82A-FAA4C342FD85}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{832CB7C6-CECA-424E-A82A-FAA4C342FD85}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CFEB9DA3-A1F6-495D-8027-D58CBE1BD4CD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CFEB9DA3-A1F6-495D-8027-D58CBE1BD4CD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CFEB9DA3-A1F6-495D-8027-D58CBE1BD4CD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CFEB9DA3-A1F6-495D-8027-D58CBE1BD4CD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AEBDAE84-0E70-4E7A-AD5F-2E05007F30A6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AEBDAE84-0E70-4E7A-AD5F-2E05007F30A6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AEBDAE84-0E70-4E7A-AD5F-2E05007F30A6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AEBDAE84-0E70-4E7A-AD5F-2E05007F30A6}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
