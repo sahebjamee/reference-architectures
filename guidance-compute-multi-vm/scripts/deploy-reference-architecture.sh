@@ -3,7 +3,7 @@
 RESOURCE_GROUP_NAME="ra-multi-vm-rg"
 LOCATION="centralus"
 
-TEMPLATE_ROOT_URI=${TEMPLATE_ROOT_URI:="https://raw.githubusercontent.com/mspnp/arm-building-blocks/master/"}
+TEMPLATE_ROOT_URI=${TEMPLATE_ROOT_URI:="https://raw.githubusercontent.com/mspnp/template-building-blocks/master/"}
 # Make sure we have a trailing slash
 [[ "${TEMPLATE_ROOT_URI}" != */ ]] && TEMPLATE_ROOT_URI="${TEMPLATE_ROOT_URI}/"
 
@@ -103,16 +103,16 @@ echo
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
-VIRTUAL_NETWORK_TEMPLATE_URI="${TEMPLATE_ROOT_URI}ARMBuildingBlocks/Templates/buildingBlocks/vnet-n-subnet/azuredeploy.json"
-VIRTUAL_NETWORK_PARAMETERS_PATH="${SCRIPT_DIR}/../Parameters/${OS_TYPE}/virtualNetwork.parameters.json"
+VIRTUAL_NETWORK_TEMPLATE_URI="${TEMPLATE_ROOT_URI}templates/buildingBlocks/vnet-n-subnet/azuredeploy.json"
+VIRTUAL_NETWORK_PARAMETERS_PATH="${SCRIPT_DIR}/../parameters/${OS_TYPE}/virtualNetwork.parameters.json"
 VIRTUAL_NETWORK_DEPLOYMENT_NAME="ra-multi-vm-vnet-deployment"
 
-LOAD_BALANCER_TEMPLATE_URI="${TEMPLATE_ROOT_URI}ARMBuildingBlocks/Templates/buildingBlocks/loadBalancer-backend-n-vm/azuredeploy.json"
-LOAD_BALANCER_PARAMETERS_PATH="${SCRIPT_DIR}/../Parameters/${OS_TYPE}/virtualMachine.parameters.json"
+LOAD_BALANCER_TEMPLATE_URI="${TEMPLATE_ROOT_URI}templates/buildingBlocks/loadBalancer-backend-n-vm/azuredeploy.json"
+LOAD_BALANCER_PARAMETERS_PATH="${SCRIPT_DIR}/../parameters/${OS_TYPE}/virtualMachine.parameters.json"
 LOAD_BALANCER_DEPLOYMENT_NAME="ra-multi-vm-deployment"
 
-NETWORK_SECURITY_GROUP_TEMPLATE_URI="${TEMPLATE_ROOT_URI}ARMBuildingBlocks/Templates/buildingBlocks/networkSecurityGroups/azuredeploy.json"
-NETWORK_SECURITY_GROUP_PARAMETERS_PATH="${SCRIPT_DIR}/../Parameters/${OS_TYPE}/networkSecurityGroups.parameters.json"
+NETWORK_SECURITY_GROUP_TEMPLATE_URI="${TEMPLATE_ROOT_URI}templates/buildingBlocks/networkSecurityGroups/azuredeploy.json"
+NETWORK_SECURITY_GROUP_PARAMETERS_PATH="${SCRIPT_DIR}/../parameters/${OS_TYPE}/networkSecurityGroups.parameters.json"
 NETWORK_SECURITY_GROUP_DEPLOYMENT_NAME="ra-multi-vm-nsg-deployment"
 
 azure config mode arm
