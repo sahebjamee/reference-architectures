@@ -15,17 +15,18 @@
     }
   },
   "variables": {
-    "templateRootUri": "https://raw.githubusercontent.com/mspnp/arm-building-blocks/master/",
+    "templateRootUri": "https://raw.githubusercontent.com/mspnp/",
+    "templateFork": "kirpas/multi-vm",
     "templates": {
       "deployment": {
-        "lb": "[concat(variables('templateRootUri'), 'ARMBuildingBlocks/Templates/buildingBlocks/loadBalancer-backend-n-vm/azuredeploy.json')]",
-        "vnet": "[concat(variables('templateRootUri'), 'ARMBuildingBlocks/Templates/buildingBlocks/vnet-n-subnet/azuredeploy.json')]",
-        "nsg": "[concat(variables('templateRootUri'), 'ARMBuildingBlocks/Templates/buildingBlocks/networkSecurityGroups/azuredeploy.json')]"
+        "lb": "[concat(variables('templateRootUri'), 'template-building-blocks/', variables('templateFork'), '/templates/buildingBlocks/loadBalancer-backend-n-vm/azuredeploy.json')]",
+        "vnet": "[concat(variables('templateRootUri'), 'template-building-blocks/', variables('templateFork'), '/templates/buildingBlocks/vnet-n-subnet/azuredeploy.json')]",
+        "nsg": "[concat(variables('templateRootUri'), 'template-building-blocks/', variables('templateFork'), '/templates/buildingBlocks/networkSecurityGroups/azuredeploy.json')]"
       },
       "parameter": {
-        "vnet": "[concat(variables('templateRootUri'), 'guidance-compute-multi-vm/Parameters/', parameters('osType'), '/virtualNetwork.parameters.json')]",
-        "nsg": "[concat(variables('templateRootUri'), 'guidance-compute-multi-vm/Parameters/', parameters('osType'), '/networkSecurityGroups.parameters.json')]",
-        "lb": "[concat(variables('templateRootUri'), 'guidance-compute-multi-vm/Parameters/', parameters('osType'), '/virtualMachine.parameters.json')]"
+        "vnet": "[concat(variables('templateRootUri'), 'reference-architectures/', variables('templateFork'), '/guidance-compute-multi-vm/parameters/', parameters('osType'), '/virtualNetwork.parameters.json')]",
+        "nsg": "[concat(variables('templateRootUri'), 'reference-architectures/', variables('templateFork'), 'guidance-compute-multi-vm/parameters/', parameters('osType'), '/networkSecurityGroups.parameters.json')]",
+        "lb": "[concat(variables('templateRootUri'), 'reference-architectures/', variables('templateFork'), 'guidance-compute-multi-vm/parameters/', parameters('osType'), '/virtualMachine.parameters.json')]"
       }
     }
   },
