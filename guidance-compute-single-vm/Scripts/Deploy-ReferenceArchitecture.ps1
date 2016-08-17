@@ -15,7 +15,7 @@ $ErrorActionPreference = "Stop"
 
 $templateRootUriString = $env:TEMPLATE_ROOT_URI
 if ($templateRootUriString -eq $null) {
-  $templateRootUriString = "https://raw.githubusercontent.com/mspnp/arm-building-blocks/master/"
+  $templateRootUriString = "https://raw.githubusercontent.com/mspnp/template-building-blocks/master/"
 }
 
 if (![System.Uri]::IsWellFormedUriString($templateRootUriString, [System.UriKind]::Absolute)) {
@@ -27,9 +27,9 @@ Write-Host "Using $templateRootUriString to locate templates"
 Write-Host
 
 $templateRootUri = New-Object System.Uri -ArgumentList @($templateRootUriString)
-$virtualNetworkTemplate = New-Object System.Uri -ArgumentList @($templateRootUri, "ARMBuildingBlocks/Templates/buildingBlocks/vnet-n-subnet/azuredeploy.json")
-$virtualMachineTemplate = New-Object System.Uri -ArgumentList @($templateRootUri, "ARMBuildingBlocks/Templates/buildingBlocks/multi-vm-n-nic-m-storage/azuredeploy.json")
-$networkSecurityGroupTemplate = New-Object System.Uri -ArgumentList @($templateRootUri, "ARMBuildingBlocks/Templates/buildingBlocks/networkSecurityGroups/azuredeploy.json")
+$virtualNetworkTemplate = New-Object System.Uri -ArgumentList @($templateRootUri, "templates/buildingBlocks/vnet-n-subnet/azuredeploy.json")
+$virtualMachineTemplate = New-Object System.Uri -ArgumentList @($templateRootUri, "templates/buildingBlocks/multi-vm-n-nic-m-storage/azuredeploy.json")
+$networkSecurityGroupTemplate = New-Object System.Uri -ArgumentList @($templateRootUri, "templates/buildingBlocks/networkSecurityGroups/azuredeploy.json")
 $virtualNetworkParametersFile = [System.IO.Path]::Combine($PSScriptRoot, "..\Parameters", $OSType.ToLower(), "virtualNetwork.parameters.json")
 $virtualMachineParametersFile = [System.IO.Path]::Combine($PSScriptRoot, "..\Parameters", $OSType.ToLower(), "virtualMachine.parameters.json")
 $networkSecurityGroupParametersFile = [System.IO.Path]::Combine($PSScriptRoot, "..\Parameters", $OSType.ToLower(), "networkSecurityGroups.parameters.json")
