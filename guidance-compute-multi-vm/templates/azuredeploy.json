@@ -26,8 +26,8 @@
       },
       "parameter": {
         "vnet": "[concat(variables('templateRootUri'), 'reference-architectures/', variables('parameterFork'), '/guidance-compute-multi-vm/parameters/', parameters('osType'), '/virtualNetwork.parameters.json')]",
-        "nsg": "[concat(variables('templateRootUri'), 'reference-architectures/', variables('parameterFork'), 'guidance-compute-multi-vm/parameters/', parameters('osType'), '/networkSecurityGroups.parameters.json')]",
-        "lb": "[concat(variables('templateRootUri'), 'reference-architectures/', variables('parameterFork'), 'guidance-compute-multi-vm/parameters/', parameters('osType'), '/virtualMachine.parameters.json')]"
+        "nsg": "[concat(variables('templateRootUri'), 'reference-architectures/', variables('parameterFork'), '/guidance-compute-multi-vm/parameters/', parameters('osType'), '/networkSecurityGroups.parameters.json')]",
+        "lb": "[concat(variables('templateRootUri'), 'reference-architectures/', variables('parameterFork'), '/guidance-compute-multi-vm/parameters/', parameters('osType'), '/virtualMachine.parameters.json')]"
       }
     }
   },
