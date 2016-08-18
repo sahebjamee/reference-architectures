@@ -31,7 +31,6 @@
     <None Include="Deployment.targets">
       <Visible>False</Visible>
     </None>
-    <Content Include="Scripts\Deploy_ReferenceArchitecture.ps1" />
     <Content Include="Templates\azuredeploy.json" />
     <None Include="Parameters\linux\networkSecurityGroups.parameters.json" />
     <None Include="Parameters\linux\virtualMachine.parameters.json" />
@@ -39,6 +38,7 @@
     <None Include="Parameters\windows\networkSecurityGroups.parameters.json" />
     <None Include="Parameters\windows\virtualMachine.parameters.json" />
     <None Include="Parameters\windows\virtualNetwork.parameters.json" />
+    <None Include="scripts\deploy-reference-architecture.ps1" />
     <None Include="Scripts\deploy-reference-architecture.sh" />
   </ItemGroup>
   <Target Name="GetReferenceAssemblyPaths" />

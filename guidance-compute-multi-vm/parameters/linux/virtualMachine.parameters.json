@@ -4,10 +4,10 @@
   "parameters": {
     "virtualMachinesSettings": {
       "value": {
-        "namePrefix": "app1",
+        "namePrefix": "ra",
         "computerNamePrefix": "cn",
         "size": "Standard_DS1",
-        "osType": "windows",
+        "osType": "linux",
         "adminUsername": "testuser",
         "adminPassword": "AweS0me@PW",
         "sshPublicKey": "",
@@ -15,7 +15,7 @@
         "nics": [
           {
             "isPublic": "false",
-            "subnetName": "app1-subnet",
+            "subnetName": "ra-subnet",
             "privateIPAllocationMethod": "dynamic",
             "publicIPAllocationMethod": "dynamic",
             "isPrimary": "true",
@@ -24,9 +24,9 @@
           }
         ],
         "imageReference": {
-          "publisher": "MicrosoftWindowsServer",
-          "offer": "WindowsServer",
-          "sku": "2012-R2-Datacenter",
+          "publisher": "canonical",
+          "offer": "ubuntuserver",
+          "sku": "14.04.5-LTS",
           "version": "latest"
         },
         "dataDisks": {
@@ -42,7 +42,7 @@
         },
         "availabilitySet": {
           "useExistingAvailabilitySet": "No",
-          "name": "app1-dev-as"
+          "name": "ra-dev-as"
         }
       }
     },
@@ -51,11 +51,11 @@
         "name": "dev-lb",
         "frontendIPConfigurations": [
           {
-            "name": "config1",
+            "name": "lb-fe-config1",
             "loadBalancerType": "public",
             "internalLoadBalancerSettings": {
               "privateIPAddress": "10.0.0.250",
-              "subnetName": "app1-subnet"
+              "subnetName": "ra-subnet"
             }
           }
         ],
@@ -66,7 +66,7 @@
             "backendPort": 80,
             "protocol": "Tcp",
             "backendPoolName": "lb-bep1",
-            "frontendIPConfigurationName": "config1"
+            "frontendIPConfigurationName": "lb-fe-config1"
           }
         ],
         "probes": [
@@ -82,13 +82,24 @@
             "name": "lb-bep1",
             "nicIndex": 0
           }
+        ],
+        "inboundNatRules": [
+          {
+            "namePrefix": "rdp",
+            "frontendIPConfigurationName": "lb-fe-config1",
+            "startingFrontendPort": 50000,
+            "backendPort": 22,
+            "natRuleType": "All",
+            "protocol": "Tcp",
+            "nicIndex": 0
+          }
         ]
       }
     },
     "virtualNetworkSettings": {
       "value": {
-        "name": "app1-vnet",
-        "resourceGroup": "app1-dev-rg"
+        "name": "ra-vnet",
+        "resourceGroup": "ra-multi-vm-rg"
       }
     },
     "buildingBlockSettings": {
