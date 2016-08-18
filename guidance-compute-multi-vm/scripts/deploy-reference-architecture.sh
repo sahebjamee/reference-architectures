@@ -108,8 +108,8 @@ VIRTUAL_NETWORK_PARAMETERS_PATH="${SCRIPT_DIR}/../parameters/${OS_TYPE}/virtualN
 VIRTUAL_NETWORK_DEPLOYMENT_NAME="ra-multi-vm-vnet-deployment"
 
 LOAD_BALANCER_TEMPLATE_URI="${TEMPLATE_ROOT_URI}templates/buildingBlocks/loadBalancer-backend-n-vm/azuredeploy.json"
-LOAD_BALANCER_PARAMETERS_PATH="${SCRIPT_DIR}/../parameters/${OS_TYPE}/virtualMachine.parameters.json"
-LOAD_BALANCER_DEPLOYMENT_NAME="ra-multi-vm-deployment"
+LOAD_BALANCER_PARAMETERS_PATH="${SCRIPT_DIR}/../parameters/${OS_TYPE}/loadBalancer.parameters.json"
+LOAD_BALANCER_DEPLOYMENT_NAME="ra-multi-vm-lb-deployment"
 
 NETWORK_SECURITY_GROUP_TEMPLATE_URI="${TEMPLATE_ROOT_URI}templates/buildingBlocks/networkSecurityGroups/azuredeploy.json"
 NETWORK_SECURITY_GROUP_PARAMETERS_PATH="${SCRIPT_DIR}/../parameters/${OS_TYPE}/networkSecurityGroups.parameters.json"
