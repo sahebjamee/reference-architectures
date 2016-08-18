@@ -38,7 +38,8 @@
             "name": "lb-bep1",
             "nicIndex": 0
           }
-        ]
+        ],
+        "inboundNatRules": [ ]
       }
     },
     "virtualMachinesSettings": {

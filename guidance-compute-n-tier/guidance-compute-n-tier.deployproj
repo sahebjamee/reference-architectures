@@ -41,7 +41,8 @@
     <None Include="Parameters\windows\networkSecurityGroup.parameters.json" />
     <None Include="Parameters\windows\virtualNetwork.parameters.json" />
     <None Include="Parameters\windows\webTier.parameters.json" />
-    <None Include="Scripts\Deploy-ReferenceArchitecture.ps1" />
+    <None Include="scripts\deploy-reference-architecture.ps1" />
+    <None Include="Scripts\deploy-reference-architecture.sh" />
   </ItemGroup>
   <Target Name="GetReferenceAssemblyPaths" />
 </Project>
