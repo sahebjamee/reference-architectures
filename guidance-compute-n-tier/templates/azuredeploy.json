@@ -15,22 +15,23 @@
     }
   },
   "variables": {
-    "armBbUri": "https://raw.githubusercontent.com/mspnp/arm-building-blocks/kirpas/vm-name-fix/ARMBuildingBlocks/Templates/",
+    "templateRootUri": "https://raw.githubusercontent.com/mspnp/template-building-blocks/master/",
+    "parameterRootUri": "https://raw.githubusercontent.com/mspnp/reference-architectures/master/",
     "templates": {
       "deployment": {
-        "lb": "[concat(variables('armBbUri'), 'buildingBlocks/loadBalancer-backend-n-vm/azuredeploy.json')]",
-        "vnet": "[concat(variables('armBbUri'), 'buildingBlocks/vnet-n-subnet/azuredeploy.json')]",
-        "vm": "[concat(variables('armBbUri'), 'buildingBlocks/multi-vm-n-nic-m-storage/azuredeploy.json')]",
-        "nsg": "[concat(variables('armBbUri'), 'resources/Microsoft.Network/networkSecurityGroups/networkSecurityGroups.json')]"
+        "lb": "[concat(variables('templateRootUri'), 'templates/buildingBlocks/loadBalancer-backend-n-vm/azuredeploy.json')]",
+        "vnet": "[concat(variables('templateRootUri'), 'templates/buildingBlocks/vnet-n-subnet/azuredeploy.json')]",
+        "vm": "[concat(variables('templateRootUri'), 'templates/buildingBlocks/multi-vm-n-nic-m-storage/azuredeploy.json')]",
+        "nsg": "[concat(variables('templateRootUri'), 'templates/buildingBlocks/networkSecurityGroups/azuredeploy.json')]"
       },
       "parameter": {
-        "vnet": "[uri(deployment().properties.templateLink.uri, concat('../Parameters/', parameters('osType'), '/virtualNetwork.parameters.json'))]",
-        "nsg": "[uri(deployment().properties.templateLink.uri, concat('../Parameters/', parameters('osType'), '/networkSecurityGroup.parameters.json'))]",
-        "lb": "[uri(deployment().properties.templateLink.uri, concat('../Parameters/', parameters('osType'), '/virtualMachine.parameters.json'))]",
-        "webTier": "[uri(deployment().properties.templateLink.uri, concat('../Parameters/', parameters('osType'), '/webTier.parameters.json'))]",
-        "dataTier": "[uri(deployment().properties.templateLink.uri, concat('../Parameters/', parameters('osType'), '/dataTier.parameters.json'))]",
-        "businessTier": "[uri(deployment().properties.templateLink.uri, concat('../Parameters/', parameters('osType'), '/businessTier.parameters.json'))]",
-        "managementTier": "[uri(deployment().properties.templateLink.uri, concat('../Parameters/', parameters('osType'), '/managementTier.parameters.json'))]"
+        "vnet": "[concat(variables('parameterRootUri'), 'guidance-compute-multi-vm/parameters/', parameters('osType'), '/virtualNetwork.parameters.json')]",
+        "nsg": "[concat(variables('parameterRootUri'), 'guidance-compute-multi-vm/parameters/', parameters('osType'), '/networkSecurityGroups.parameters.json')]",
+        "lb": "[concat(variables('parameterRootUri'), 'guidance-compute-multi-vm/parameters/', parameters('osType'), '/virtualMachine.parameters.json')]",
+        "webTier": "[concat(variables('parameterRootUri'), 'guidance-compute-multi-vm/parameters/', parameters('osType'), '/webTier.parameters.json')]",
+        "dataTier": "[concat(variables('parameterRootUri'), 'guidance-compute-multi-vm/parameters/', parameters('osType'), '/dataTier.parameters.json')]",
+        "businessTier": "[concat(variables('parameterRootUri'), 'guidance-compute-multi-vm/parameters/', parameters('osType'), '/businessTier.parameters.json')]",
+        "managementTier": "[concat(variables('parameterRootUri'), 'guidance-compute-multi-vm/parameters/', parameters('osType'), '/managementTier.parameters.json')]"
       }
     }
   },
