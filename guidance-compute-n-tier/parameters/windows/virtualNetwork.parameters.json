@@ -4,7 +4,7 @@
   "parameters": {
     "virtualNetworkSettings": {
       "value": {
-        "name": "app1-vnet",
+        "name": "ra-vnet",
         "addressPrefixes": [
           "10.0.0.0/16"
         ],
