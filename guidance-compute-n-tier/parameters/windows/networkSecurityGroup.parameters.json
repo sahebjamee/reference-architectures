@@ -8,7 +8,7 @@
         "resourceGroup": "ra-ntier-vm-rg"
 	}
     },
-    "networkSecurityGroupSettings": {
+    "networkSecurityGroupsSettings": {
       "value": [
         {
           "name": "app1-biz-nsg",
