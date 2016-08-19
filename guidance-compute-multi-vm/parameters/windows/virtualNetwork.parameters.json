@@ -4,14 +4,14 @@
   "parameters": {
     "virtualNetworkSettings": {
       "value": {
-        "name": "ra-vnet",
-        "resourceGroup": "ra-dev-rg",
+        "name": "ra-multi-vm-vnet",
+        "resourceGroup": "ra-multi-vm-rg",
         "addressPrefixes": [
           "10.0.0.0/16"
         ],
         "subnets": [
           {
-            "name": "ra-subnet",
+            "name": "ra-multi-vm-sn",
             "addressPrefix": "10.0.0.0/24"
           }
         ],

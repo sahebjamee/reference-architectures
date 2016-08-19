@@ -33,12 +33,12 @@
     </None>
     <Content Include="Templates\azuredeploy.json" />
     <None Include="Parameters\linux\networkSecurityGroups.parameters.json" />
-    <None Include="Parameters\linux\virtualMachine.parameters.json" />
+    <None Include="Parameters\linux\loadBalancer.parameters.json" />
     <None Include="Parameters\linux\virtualNetwork.parameters.json" />
     <None Include="Parameters\windows\networkSecurityGroups.parameters.json" />
-    <None Include="Parameters\windows\virtualMachine.parameters.json" />
+    <None Include="Parameters\windows\loadBalancer.parameters.json" />
     <None Include="Parameters\windows\virtualNetwork.parameters.json" />
-    <None Include="scripts\deploy-reference-architecture.ps1" />
+    <None Include="scripts\Deploy-ReferenceArchitecture.ps1" />
     <None Include="Scripts\deploy-reference-architecture.sh" />
   </ItemGroup>
   <Target Name="GetReferenceAssemblyPaths" />

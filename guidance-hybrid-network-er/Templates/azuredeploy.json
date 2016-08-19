@@ -4,21 +4,28 @@
   "parameters": {
     "templateRootUri": {
       "type": "string",
-      "defaultValue": "https://raw.githubusercontent.com/mspnp/arm-building-blocks/master/",
+      "defaultValue": "https://raw.githubusercontent.com/mspnp/template-building-blocks/master/",
       "metadata": {
         "description": "Root path for templates"
+      }
+    },
+    "parameterRootUri": {
+      "type": "string",
+      "defaultValue": "https://raw.githubusercontent.com/mspnp/reference-architectures/master/",
+      "metadata": {
+        "decription": "Root path for parameters"
       }
     }
   },
   "variables": {
     "templates": {
       "deployment": {
-        "virtualNetwork": "[uri(parameters('templateRootUri'), 'ARMBuildingBlocks/Templates/buildingBlocks/vnet-n-subnet/azuredeploy.json')]",
-        "virtualNetworkGateway": "[uri(parameters('templateRootUri'), 'ARMBuildingBlocks/Templates/buildingBlocks/vpn-gateway-vpn-connection/azuredeploy.json')]"
+        "virtualNetwork": "[uri(parameters('templateRootUri'), 'templates/buildingBlocks/vnet-n-subnet/azuredeploy.json')]",
+        "virtualNetworkGateway": "[uri(parameters('templateRootUri'), 'templates/buildingBlocks/vpn-gateway-vpn-connection/azuredeploy.json')]"
       },
       "parameter": {
-        "virtualNetwork": "[uri(parameters('templateRootUri'), 'guidance-hybrid-network-er/Parameters/virtualNetwork.parameters.json')]",
-        "virtualNetworkGateway": "[uri(parameters('templateRootUri'), 'guidance-hybrid-network-er/Parameters/virtualNetworkGateway.parameters.json')]"
+        "virtualNetwork": "[uri(parameters('parameterRootUri'), 'guidance-hybrid-network-er/Parameters/virtualNetwork.parameters.json')]",
+        "virtualNetworkGateway": "[uri(parameters('parameterRootUri'), 'guidance-hybrid-network-er/Parameters/virtualNetworkGateway.parameters.json')]"
       }
     }
   },

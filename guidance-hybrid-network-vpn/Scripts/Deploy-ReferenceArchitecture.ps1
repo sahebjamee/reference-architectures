@@ -11,7 +11,7 @@ $ErrorActionPreference = "Stop"
 
 $templateRootUriString = $env:TEMPLATE_ROOT_URI
 if ($templateRootUriString -eq $null) {
-  $templateRootUriString = "https://raw.githubusercontent.com/mspnp/arm-building-blocks/master/"
+  $templateRootUriString = "https://raw.githubusercontent.com/mspnp/template-building-blocks/master/"
 }
 
 if (![System.Uri]::IsWellFormedUriString($templateRootUriString, [System.UriKind]::Absolute)) {
@@ -25,10 +25,10 @@ Write-Host
 $templateRootUri = New-Object System.Uri -ArgumentList @($templateRootUriString)
 
 
-$virtualNetworkTemplateUri = New-Object System.Uri -ArgumentList @($templateRootUri, "ARMBuildingBlocks/Templates/buildingBlocks/vnet-n-subnet/azuredeploy.json")
+$virtualNetworkTemplateUri = New-Object System.Uri -ArgumentList @($templateRootUri, "templates/buildingBlocks/vnet-n-subnet/azuredeploy.json")
 $virtualNetworkParametersPath = [System.IO.Path]::Combine($PSScriptRoot, "..\Parameters\virtualNetwork.parameters.json")
 
-$virtualNetworkGatewayTemplateUri = New-Object System.Uri -ArgumentList @($templateRootUri, "ARMBuildingBlocks/Templates/buildingBlocks/vpn-gateway-vpn-connection/azuredeploy.json")
+$virtualNetworkGatewayTemplateUri = New-Object System.Uri -ArgumentList @($templateRootUri, "templates/buildingBlocks/vpn-gateway-vpn-connection/azuredeploy.json")
 $virtualNetworkGatewayParametersPath = [System.IO.Path]::Combine($PSScriptRoot, "..\Parameters\virtualNetworkGateway.parameters.json")
 
 $resourceGroupName = "ra-hybrid-vpn-rg"

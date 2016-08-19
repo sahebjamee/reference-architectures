@@ -4,10 +4,10 @@
   "parameters": {
     "virtualMachinesSettings": {
       "value": {
-        "namePrefix": "ra",
+        "namePrefix": "ra-multi-vm",
         "computerNamePrefix": "cn",
         "size": "Standard_DS1",
-        "osType": "windows",
+        "osType": "linux",
         "adminUsername": "testuser",
         "adminPassword": "AweS0me@PW",
         "sshPublicKey": "",
@@ -15,7 +15,7 @@
         "nics": [
           {
             "isPublic": "false",
-            "subnetName": "ra-subnet",
+            "subnetName": "ra-multi-vm-sn",
             "privateIPAllocationMethod": "dynamic",
             "publicIPAllocationMethod": "dynamic",
             "isPrimary": "true",
@@ -24,9 +24,9 @@
           }
         ],
         "imageReference": {
-          "publisher": "MicrosoftWindowsServer",
-          "offer": "WindowsServer",
-          "sku": "2012-R2-Datacenter",
+          "publisher": "canonical",
+          "offer": "ubuntuserver",
+          "sku": "14.04.5-LTS",
           "version": "latest"
         },
         "dataDisks": {
@@ -42,20 +42,20 @@
         },
         "availabilitySet": {
           "useExistingAvailabilitySet": "No",
-          "name": "ra-dev-as"
+          "name": "ra-multi-vm-as"
         }
       }
     },
     "loadBalancerSettings": {
       "value": {
-        "name": "dev-lb",
+        "name": "ra-multi-vm-lb",
         "frontendIPConfigurations": [
           {
-            "name": "lb-fe-config1",
+            "name": "ra-multi-vm-lb-fe-config1",
             "loadBalancerType": "public",
             "internalLoadBalancerSettings": {
               "privateIPAddress": "10.0.0.250",
-              "subnetName": "ra-subnet"
+              "subnetName": "ra-multi-vm-sn"
             }
           }
         ],
@@ -65,8 +65,8 @@
             "frontendPort": 80,
             "backendPort": 80,
             "protocol": "Tcp",
-            "backendPoolName": "lb-bep1",
-            "frontendIPConfigurationName": "lb-fe-config1"
+            "backendPoolName": "ra-multi-vm-lb-bep1",
+            "frontendIPConfigurationName": "ra-multi-vm-lb-fe-config1"
           }
         ],
         "probes": [
@@ -79,16 +79,16 @@
         ],
         "backendPools": [
           {
-            "name": "lb-bep1",
+            "name": "ra-multi-vm-lb-bep1",
             "nicIndex": 0
           }
         ],
         "inboundNatRules": [
           {
             "namePrefix": "rdp",
-            "frontendIPConfigurationName": "lb-fe-config1",
+            "frontendIPConfigurationName": "ra-multi-vm-lb-fe-config1",
             "startingFrontendPort": 50000,
-            "backendPort": 3389,
+            "backendPort": 22,
             "natRuleType": "All",
             "protocol": "Tcp",
             "nicIndex": 0
@@ -98,7 +98,7 @@
     },
     "virtualNetworkSettings": {
       "value": {
-        "name": "ra-vnet",
+        "name": "ra-multi-vm-vnet",
         "resourceGroup": "ra-multi-vm-rg"
       }
     },

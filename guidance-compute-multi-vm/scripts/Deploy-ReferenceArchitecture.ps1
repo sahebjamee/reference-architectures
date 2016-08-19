@@ -32,7 +32,7 @@ $virtualMachineTemplate = New-Object System.Uri -ArgumentList @($templateRootUri
 $networkSecurityGroupTemplate = New-Object System.Uri -ArgumentList @($templateRootUri, "templates/buildingBlocks/networkSecurityGroups/azuredeploy.json")
 
 $virtualNetworkParametersFile = [System.IO.Path]::Combine($PSScriptRoot, "..\parameters", $OSType.ToLower(), "virtualNetwork.parameters.json")
-$virtualMachineParametersFile = [System.IO.Path]::Combine($PSScriptRoot, "..\parameters", $OSType.ToLower(), "virtualMachine.parameters.json")
+$virtualMachineParametersFile = [System.IO.Path]::Combine($PSScriptRoot, "..\parameters", $OSType.ToLower(), "loadBalancer.parameters.json")
 $networkSecurityGroupParametersFile = [System.IO.Path]::Combine($PSScriptRoot, "..\parameters", $OSType.ToLower(), "networkSecurityGroups.parameters.json")
 
 $resourceGroupName = "ra-multi-vm-rg"
@@ -47,8 +47,8 @@ Write-Host "Deploying virtual network..."
 New-AzureRmResourceGroupDeployment -Name "ra-multi-vm-vnet-deployment" -ResourceGroupName $resourceGroup.ResourceGroupName `
     -TemplateUri $virtualNetworkTemplate.AbsoluteUri -TemplateParameterFile $virtualNetworkParametersFile
 
-Write-Host "Deploying virtual machine..."
-New-AzureRmResourceGroupDeployment -Name "ra-multi-vm-deployment" -ResourceGroupName $resourceGroup.ResourceGroupName `
+Write-Host "Deploying load balancer..."
+New-AzureRmResourceGroupDeployment -Name "ra-multi-vm-lb-deployment" -ResourceGroupName $resourceGroup.ResourceGroupName `
     -TemplateUri $virtualMachineTemplate.AbsoluteUri -TemplateParameterFile $virtualMachineParametersFile
 
 Write-Host "Deploying network security group..."
