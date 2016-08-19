@@ -30,9 +30,9 @@ $templateRootUri = New-Object System.Uri -ArgumentList @($templateRootUriString)
 $virtualNetworkTemplate = New-Object System.Uri -ArgumentList @($templateRootUri, "templates/buildingBlocks/vnet-n-subnet/azuredeploy.json")
 $virtualMachineTemplate = New-Object System.Uri -ArgumentList @($templateRootUri, "templates/buildingBlocks/multi-vm-n-nic-m-storage/azuredeploy.json")
 $networkSecurityGroupTemplate = New-Object System.Uri -ArgumentList @($templateRootUri, "templates/buildingBlocks/networkSecurityGroups/azuredeploy.json")
-$virtualNetworkParametersFile = [System.IO.Path]::Combine($PSScriptRoot, "..\Parameters", $OSType.ToLower(), "virtualNetwork.parameters.json")
-$virtualMachineParametersFile = [System.IO.Path]::Combine($PSScriptRoot, "..\Parameters", $OSType.ToLower(), "virtualMachine.parameters.json")
-$networkSecurityGroupParametersFile = [System.IO.Path]::Combine($PSScriptRoot, "..\Parameters", $OSType.ToLower(), "networkSecurityGroups.parameters.json")
+$virtualNetworkParametersFile = [System.IO.Path]::Combine($PSScriptRoot, "parameters", $OSType.ToLower(), "virtualNetwork.parameters.json")
+$virtualMachineParametersFile = [System.IO.Path]::Combine($PSScriptRoot, "parameters", $OSType.ToLower(), "virtualMachine.parameters.json")
+$networkSecurityGroupParametersFile = [System.IO.Path]::Combine($PSScriptRoot, "parameters", $OSType.ToLower(), "networkSecurityGroups.parameters.json")
 
 $resourceGroupName = "ra-single-vm-rg"
 # Login to Azure and select your subscription
