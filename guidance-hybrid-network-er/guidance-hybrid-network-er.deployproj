@@ -25,16 +25,16 @@
   <Import Condition=" Exists('$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Deployment\1.1\DeploymentProject.targets') " Project="$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Deployment\1.1\DeploymentProject.targets" />
   <!-- vertag<:>end -->
   <ItemGroup>
+    <None Include="azuredeploy-expressRouteCircuit.json" />
+    <None Include="deploy-reference-architecture.sh" />
     <None Include="Deployment.targets">
       <Visible>False</Visible>
     </None>
-    <Content Include="Scripts\Deploy-ReferenceArchitecture.ps1" />
-    <Content Include="Templates\azuredeploy.json" />
-    <None Include="Parameters\expressRouteCircuit.parameters.json" />
-    <None Include="Parameters\virtualNetwork.parameters.json" />
-    <None Include="Parameters\virtualNetworkGateway.parameters.json" />
-    <None Include="Scripts\deploy-reference-architecture.sh" />
-    <None Include="Templates\azuredeploy-expressRouteCircuit.json" />
+    <Content Include="azuredeploy.json" />
+    <Content Include="Deploy-ReferenceArchitecture.ps1" />
+    <None Include="parameters\expressRouteCircuit.parameters.json" />
+    <None Include="parameters\virtualNetwork.parameters.json" />
+    <None Include="parameters\virtualNetworkGateway.parameters.json" />
   </ItemGroup>
   <Target Name="GetReferenceAssemblyPaths" />
 </Project>
