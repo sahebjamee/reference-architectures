@@ -1,6 +1,6 @@
 #!/bin/bash
 
-RESOURCE_GROUP_NAME="ra-multi-vm-rg"
+RESOURCE_GROUP_NAME="ra-ntier-vm-rg"
 LOCATION="centralus"
 
 TEMPLATE_ROOT_URI=${TEMPLATE_ROOT_URI:="https://raw.githubusercontent.com/mspnp/template-building-blocks/master/"}
@@ -105,15 +105,27 @@ SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 VIRTUAL_NETWORK_TEMPLATE_URI="${TEMPLATE_ROOT_URI}templates/buildingBlocks/vnet-n-subnet/azuredeploy.json"
 VIRTUAL_NETWORK_PARAMETERS_PATH="${SCRIPT_DIR}/../parameters/${OS_TYPE}/virtualNetwork.parameters.json"
-VIRTUAL_NETWORK_DEPLOYMENT_NAME="ra-multi-vm-vnet-deployment"
+VIRTUAL_NETWORK_DEPLOYMENT_NAME="ra-ntier-vnet-deployment"
+
+VIRTUAL_MACHINE_TEMPLATE_URI="${TEMPLATE_ROOT_URI}templates/buildingBlocks/multi-vm-n-nic-m-storage/azuredeploy.json"
+
+MGMT_TIER_PARAMETERS_PATH="${SCRIPT_DIR}/../parameters/${OS_TYPE}/managementTier.parameters.json"
+MGMT_TIER_DEPLOYMENT_NAME="ra-ntier-mgmt-deployment"
 
 LOAD_BALANCER_TEMPLATE_URI="${TEMPLATE_ROOT_URI}templates/buildingBlocks/loadBalancer-backend-n-vm/azuredeploy.json"
-LOAD_BALANCER_PARAMETERS_PATH="${SCRIPT_DIR}/../parameters/${OS_TYPE}/virtualMachine.parameters.json"
-LOAD_BALANCER_DEPLOYMENT_NAME="ra-multi-vm-deployment"
+
+WEB_TIER_PARAMETERS_PATH="${SCRIPT_DIR}/../parameters/${OS_TYPE}/webTier.parameters.json"
+WEB_TIER_DEPLOYMENT_NAME="ra-ntier-web-deployment"
+
+BIZ_TIER_PARAMETERS_PATH="${SCRIPT_DIR}/../parameters/${OS_TYPE}/businessTier.parameters.json"
+BIZ_TIER_DEPLOYMENT_NAME="ra-ntier-biz-deployment"
+
+DATA_TIER_PARAMETERS_PATH="${SCRIPT_DIR}/../parameters/${OS_TYPE}/dataTier.parameters.json"
+DATA_TIER_DEPLOYMENT_NAME="ra-ntier-data-deployment"
 
 NETWORK_SECURITY_GROUP_TEMPLATE_URI="${TEMPLATE_ROOT_URI}templates/buildingBlocks/networkSecurityGroups/azuredeploy.json"
 NETWORK_SECURITY_GROUP_PARAMETERS_PATH="${SCRIPT_DIR}/../parameters/${OS_TYPE}/networkSecurityGroups.parameters.json"
-NETWORK_SECURITY_GROUP_DEPLOYMENT_NAME="ra-multi-vm-nsg-deployment"
+NETWORK_SECURITY_GROUP_DEPLOYMENT_NAME="ra-ntier-nsg-deployment"
 
 azure config mode arm
 
@@ -126,9 +138,24 @@ azure group deployment create --resource-group $RESOURCE_GROUP_NAME --name $VIRT
 --template-uri $VIRTUAL_NETWORK_TEMPLATE_URI --parameters-file $VIRTUAL_NETWORK_PARAMETERS_PATH \
 --subscription $SUBSCRIPTION_ID || exit 1
 
-echo "Deploying virtual machines..."
-azure group deployment create --resource-group $RESOURCE_GROUP_NAME --name $LOAD_BALANCER_DEPLOYMENT_NAME \
---template-uri $LOAD_BALANCER_TEMPLATE_URI --parameters-file $LOAD_BALANCER_PARAMETERS_PATH \
+echo "Deploying web tier..."
+azure group deployment create --resource-group $RESOURCE_GROUP_NAME --name $WEB_TIER_DEPLOYMENT_NAME \
+--template-uri $LOAD_BALANCER_TEMPLATE_URI --parameters-file $WEB_TIER_PARAMETERS_PATH \
+--subscription $SUBSCRIPTION_ID || exit 1
+
+echo "Deploying business tier..."
+azure group deployment create --resource-group $RESOURCE_GROUP_NAME --name $BIZ_TIER_DEPLOYMENT_NAME \
+--template-uri $LOAD_BALANCER_TEMPLATE_URI --parameters-file $BIZ_TIER_PARAMETERS_PATH \
+--subscription $SUBSCRIPTION_ID || exit 1
+
+echo "Deploying data tier..."
+azure group deployment create --resource-group $RESOURCE_GROUP_NAME --name $DATA_TIER_DEPLOYMENT_NAME \
+--template-uri $LOAD_BALANCER_TEMPLATE_URI --parameters-file $DATA_TIER_PARAMETERS_PATH \
+--subscription $SUBSCRIPTION_ID || exit 1
+
+echo "Deploying management tier..."
+azure group deployment create --resource-group $RESOURCE_GROUP_NAME --name $MGMT_TIER_DEPLOYMENT_NAME \
+--template-uri $VIRTUAL_MACHINE_TEMPLATE_URI --parameters-file $MGMT_TIER_PARAMETERS_PATH \
 --subscription $SUBSCRIPTION_ID || exit 1
 
 echo "Deploying network security group..."
@@ -144,7 +171,16 @@ echo $RESOURCE_GROUP_OUTPUT
 azure group deployment show --resource-group $RESOURCE_GROUP_NAME --name $VIRTUAL_NETWORK_DEPLOYMENT_NAME \
 --subscription $SUBSCRIPTION_ID --json || exit 1
 
-azure group deployment show --resource-group $RESOURCE_GROUP_NAME --name $LOAD_BALANCER_DEPLOYMENT_NAME \
+azure group deployment show --resource-group $RESOURCE_GROUP_NAME --name $WEB_TIER_DEPLOYMENT_NAME \
+--subscription $SUBSCRIPTION_ID --json || exit 1
+
+azure group deployment show --resource-group $RESOURCE_GROUP_NAME --name $BIZ_TIER_DEPLOYMENT_NAME \
+--subscription $SUBSCRIPTION_ID --json || exit 1
+
+azure group deployment show --resource-group $RESOURCE_GROUP_NAME --name $DATA_TIER_DEPLOYMENT_NAME \
+--subscription $SUBSCRIPTION_ID --json || exit 1
+
+azure group deployment show --resource-group $RESOURCE_GROUP_NAME --name $MGMT_TIER_DEPLOYMENT_NAME \
 --subscription $SUBSCRIPTION_ID --json || exit 1
 
 azure group deployment show --resource-group $RESOURCE_GROUP_NAME --name $NETWORK_SECURITY_GROUP_DEPLOYMENT_NAME \

@@ -41,6 +41,8 @@ $webTierParametersFile = [System.IO.Path]::Combine($PSScriptRoot, '..\parameters
 $managementTierParametersFile = [System.IO.Path]::Combine($PSScriptRoot, '..\parameters', $OSType.ToLower(), 'managementTier.parameters.json')
 $networkSecurityGroupParametersFile = [System.IO.Path]::Combine($PSScriptRoot, '..\parameters', $OSType.ToLower(), 'networkSecurityGroups.parameters.json')
 
+$resourceGroupName = "ra-ntier-vm-rg"
+
 # Login to Azure and select your subscription
 Login-AzureRmAccount -SubscriptionId $SubscriptionId | Out-Null
 
