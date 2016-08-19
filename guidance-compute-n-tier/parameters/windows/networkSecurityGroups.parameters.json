@@ -128,7 +128,7 @@
           "name": "app1-mgmt-nsg",
           "subnets": [ ],
           "networkInterfaces": [
-            "ra-vm9-nic0"
+            "ra-vm9-nic1"
           ],
           "securityRules": [
             {

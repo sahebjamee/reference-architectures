@@ -32,13 +32,13 @@
     <None Include="Parameters\linux\businessTier.parameters.json" />
     <None Include="Parameters\linux\dataTier.parameters.json" />
     <None Include="Parameters\linux\managementTier.parameters.json" />
-    <None Include="Parameters\linux\networkSecurityGroup.parameters.json" />
+    <None Include="Parameters\linux\networkSecurityGroups.parameters.json" />
     <None Include="Parameters\linux\virtualNetwork.parameters.json" />
     <None Include="Parameters\linux\webTier.parameters.json" />
     <None Include="Parameters\windows\businessTier.parameters.json" />
     <None Include="Parameters\windows\dataTier.parameters.json" />
     <None Include="Parameters\windows\managementTier.parameters.json" />
-    <None Include="Parameters\windows\networkSecurityGroup.parameters.json" />
+    <None Include="Parameters\windows\networkSecurityGroups.parameters.json" />
     <None Include="Parameters\windows\virtualNetwork.parameters.json" />
     <None Include="Parameters\windows\webTier.parameters.json" />
     <None Include="scripts\deploy-reference-architecture.ps1" />
