@@ -93,11 +93,11 @@ echo
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 VIRTUAL_NETWORK_TEMPLATE_URI="${TEMPLATE_ROOT_URI}templates/buildingBlocks/vnet-n-subnet/azuredeploy.json"
-VIRTUAL_NETWORK_PARAMETERS_PATH="${SCRIPT_DIR}/../Parameters/virtualNetwork.parameters.json"
+VIRTUAL_NETWORK_PARAMETERS_PATH="${SCRIPT_DIR}/parameters/virtualNetwork.parameters.json"
 VIRTUAL_NETWORK_DEPLOYMENT_NAME="ra-hybrid-vpn-vnet-deployment"
 
 VIRTUAL_NETWORK_GATEWAY_TEMPLATE_URI="${TEMPLATE_ROOT_URI}templates/buildingBlocks/vpn-gateway-vpn-connection/azuredeploy.json"
-VIRTUAL_NETWORK_GATEWAY_PARAMETERS_PATH="${SCRIPT_DIR}/../Parameters/virtualNetworkGateway.parameters.json"
+VIRTUAL_NETWORK_GATEWAY_PARAMETERS_PATH="${SCRIPT_DIR}/parameters/virtualNetworkGateway.parameters.json"
 VIRTUAL_NETWORK_GATEWAY_DEPLOYMENT_NAME="ra-hybrid-vpn-gateway-deployment"
 
 azure config mode arm

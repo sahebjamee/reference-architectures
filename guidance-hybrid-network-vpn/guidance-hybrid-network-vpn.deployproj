@@ -25,14 +25,14 @@
   <Import Condition=" Exists('$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Deployment\1.1\DeploymentProject.targets') " Project="$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Deployment\1.1\DeploymentProject.targets" />
   <!-- vertag<:>end -->
   <ItemGroup>
+    <None Include="azuredeploy.json" />
+    <None Include="deploy-reference-architecture.sh" />
+    <None Include="Deploy-ReferenceArchitecture.ps1" />
     <None Include="Deployment.targets">
       <Visible>False</Visible>
     </None>
-    <None Include="Parameters\virtualNetwork.parameters.json" />
-    <None Include="Parameters\virtualNetworkGateway.parameters.json" />
-    <None Include="Scripts\deploy-reference-architecture.sh" />
-    <None Include="Scripts\Deploy-ReferenceArchitecture.ps1" />
-    <None Include="Templates\azuredeploy.json" />
+    <None Include="parameters\virtualNetwork.parameters.json" />
+    <None Include="parameters\virtualNetworkGateway.parameters.json" />
   </ItemGroup>
   <Target Name="GetReferenceAssemblyPaths" />
 </Project>
