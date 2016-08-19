@@ -31,9 +31,9 @@ $virtualNetworkTemplate = New-Object System.Uri -ArgumentList @($templateRootUri
 $virtualMachineTemplate = New-Object System.Uri -ArgumentList @($templateRootUri, "templates/buildingBlocks/loadBalancer-backend-n-vm/azuredeploy.json")
 $networkSecurityGroupTemplate = New-Object System.Uri -ArgumentList @($templateRootUri, "templates/buildingBlocks/networkSecurityGroups/azuredeploy.json")
 
-$virtualNetworkParametersFile = [System.IO.Path]::Combine($PSScriptRoot, "..\parameters", $OSType.ToLower(), "virtualNetwork.parameters.json")
-$virtualMachineParametersFile = [System.IO.Path]::Combine($PSScriptRoot, "..\parameters", $OSType.ToLower(), "loadBalancer.parameters.json")
-$networkSecurityGroupParametersFile = [System.IO.Path]::Combine($PSScriptRoot, "..\parameters", $OSType.ToLower(), "networkSecurityGroups.parameters.json")
+$virtualNetworkParametersFile = [System.IO.Path]::Combine($PSScriptRoot, "parameters", $OSType.ToLower(), "virtualNetwork.parameters.json")
+$virtualMachineParametersFile = [System.IO.Path]::Combine($PSScriptRoot, "parameters", $OSType.ToLower(), "loadBalancer.parameters.json")
+$networkSecurityGroupParametersFile = [System.IO.Path]::Combine($PSScriptRoot, "parameters", $OSType.ToLower(), "networkSecurityGroups.parameters.json")
 
 $resourceGroupName = "ra-multi-vm-rg"
 
