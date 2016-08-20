@@ -25,9 +25,9 @@
         "virtualNetworkGateway": "[uri(parameters('templateRootUri'), 'templates/buildingBlocks/vpn-gateway-vpn-connection/azuredeploy.json')]"
       },
       "parameter": {
-        "virtualNetwork": "[uri(parameters('parameterRootUri'), 'guidance-hybrid-network-vpn-er/Parameters/virtualNetwork.parameters.json')]",
-        "expressRouteGateway": "[uri(parameters('parameterRootUri'), 'guidance-hybrid-network-vpn-er/Parameters/virtualNetworkGateway-expressRoute.parameters.json')]",
-        "virtualNetworkGateway": "[uri(parameters('parameterRootUri'), 'guidance-hybrid-network-vpn-er/Parameters/virtualNetworkGateway-vpn.parameters.json')]"
+        "virtualNetwork": "[uri(parameters('parameterRootUri'), 'guidance-hybrid-network-vpn-er/parameters/virtualNetwork.parameters.json')]",
+        "expressRouteGateway": "[uri(parameters('parameterRootUri'), 'guidance-hybrid-network-vpn-er/parameters/virtualNetworkGateway-expressRoute.parameters.json')]",
+        "virtualNetworkGateway": "[uri(parameters('parameterRootUri'), 'guidance-hybrid-network-vpn-er/parameters/virtualNetworkGateway-vpn.parameters.json')]"
       }
     }
   },
