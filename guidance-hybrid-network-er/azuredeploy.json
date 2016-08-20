@@ -24,8 +24,8 @@
         "virtualNetworkGateway": "[uri(parameters('templateRootUri'), 'templates/buildingBlocks/vpn-gateway-vpn-connection/azuredeploy.json')]"
       },
       "parameter": {
-        "virtualNetwork": "[uri(parameters('parameterRootUri'), 'guidance-hybrid-network-vpn/Parameters/virtualNetwork.parameters.json')]",
-        "virtualNetworkGateway": "[uri(parameters('parameterRootUri'), 'guidance-hybrid-network-vpn/Parameters/virtualNetworkGateway.parameters.json')]"
+        "virtualNetwork": "[uri(parameters('parameterRootUri'), 'guidance-hybrid-network-er/parameters/virtualNetwork.parameters.json')]",
+        "virtualNetworkGateway": "[uri(parameters('parameterRootUri'), 'guidance-hybrid-network-er/parameters/virtualNetworkGateway.parameters.json')]"
       }
     }
   },
@@ -33,7 +33,7 @@
     {
       "type": "Microsoft.Resources/deployments",
       "apiVersion": "2015-01-01",
-      "name": "ra-hybrid-vnet-deployment",
+      "name": "ra-hybrid-er-vnet-deployment",
       "properties": {
         "mode": "Incremental",
         "templateLink": {
@@ -47,9 +47,9 @@
     {
       "type": "Microsoft.Resources/deployments",
       "apiVersion": "2015-01-01",
-      "name": "ra-hybrid-vpn-deployment",
+      "name": "ra-hybrid-er-deployment",
       "dependsOn": [
-        "ra-hybrid-vnet-deployment"
+        "ra-hybrid-er-vnet-deployment"
       ],
       "properties": {
         "mode": "Incremental",

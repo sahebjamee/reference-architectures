@@ -1,6 +1,6 @@
 #!/bin/bash
 
-RESOURCE_GROUP_NAME="ra-single-vm-rg"
+RESOURCE_GROUP_NAME="ra-multi-vm-rg"
 LOCATION="centralus"
 
 TEMPLATE_ROOT_URI=${TEMPLATE_ROOT_URI:="https://raw.githubusercontent.com/mspnp/template-building-blocks/master/"}
@@ -37,6 +37,7 @@ showErrorAndUsage() {
     echo "  error:  $1"
     echo
   fi
+
   echo "  usage:  $(basename ${0}) [options]"
   echo "  options:"
   echo "    -l, --location <location>"
@@ -103,16 +104,16 @@ echo
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 VIRTUAL_NETWORK_TEMPLATE_URI="${TEMPLATE_ROOT_URI}templates/buildingBlocks/vnet-n-subnet/azuredeploy.json"
-VIRTUAL_NETWORK_PARAMETERS_PATH="${SCRIPT_DIR}/../Parameters/${OS_TYPE}/virtualNetwork.parameters.json"
-VIRTUAL_NETWORK_DEPLOYMENT_NAME="ra-single-vm-vnet-deployment"
+VIRTUAL_NETWORK_PARAMETERS_PATH="${SCRIPT_DIR}/parameters/${OS_TYPE}/virtualNetwork.parameters.json"
+VIRTUAL_NETWORK_DEPLOYMENT_NAME="ra-multi-vm-vnet-deployment"
 
-VIRTUAL_MACHINE_TEMPLATE_URI="${TEMPLATE_ROOT_URI}templates/buildingBlocks/multi-vm-n-nic-m-storage/azuredeploy.json"
-VIRTUAL_MACHINE_PARAMETERS_PATH="${SCRIPT_DIR}/../Parameters/${OS_TYPE}/virtualMachine.parameters.json"
-VIRTUAL_MACHINE_DEPLOYMENT_NAME="ra-single-vm-deployment"
+LOAD_BALANCER_TEMPLATE_URI="${TEMPLATE_ROOT_URI}templates/buildingBlocks/loadBalancer-backend-n-vm/azuredeploy.json"
+LOAD_BALANCER_PARAMETERS_PATH="${SCRIPT_DIR}/parameters/${OS_TYPE}/loadBalancer.parameters.json"
+LOAD_BALANCER_DEPLOYMENT_NAME="ra-multi-vm-lb-deployment"
 
 NETWORK_SECURITY_GROUP_TEMPLATE_URI="${TEMPLATE_ROOT_URI}templates/buildingBlocks/networkSecurityGroups/azuredeploy.json"
-NETWORK_SECURITY_GROUP_PARAMETERS_PATH="${SCRIPT_DIR}/../Parameters/${OS_TYPE}/networkSecurityGroups.parameters.json"
-NETWORK_SECURITY_GROUP_DEPLOYMENT_NAME="ra-single-vm-nsg-deployment"
+NETWORK_SECURITY_GROUP_PARAMETERS_PATH="${SCRIPT_DIR}/parameters/${OS_TYPE}/networkSecurityGroups.parameters.json"
+NETWORK_SECURITY_GROUP_DEPLOYMENT_NAME="ra-multi-vm-nsg-deployment"
 
 azure config mode arm
 
@@ -125,9 +126,9 @@ azure group deployment create --resource-group $RESOURCE_GROUP_NAME --name $VIRT
 --template-uri $VIRTUAL_NETWORK_TEMPLATE_URI --parameters-file $VIRTUAL_NETWORK_PARAMETERS_PATH \
 --subscription $SUBSCRIPTION_ID || exit 1
 
-echo "Deploying virtual machine..."
-azure group deployment create --resource-group $RESOURCE_GROUP_NAME --name $VIRTUAL_MACHINE_DEPLOYMENT_NAME \
---template-uri $VIRTUAL_MACHINE_TEMPLATE_URI --parameters-file $VIRTUAL_MACHINE_PARAMETERS_PATH \
+echo "Deploying virtual machines..."
+azure group deployment create --resource-group $RESOURCE_GROUP_NAME --name $LOAD_BALANCER_DEPLOYMENT_NAME \
+--template-uri $LOAD_BALANCER_TEMPLATE_URI --parameters-file $LOAD_BALANCER_PARAMETERS_PATH \
 --subscription $SUBSCRIPTION_ID || exit 1
 
 echo "Deploying network security group..."
@@ -143,7 +144,7 @@ echo $RESOURCE_GROUP_OUTPUT
 azure group deployment show --resource-group $RESOURCE_GROUP_NAME --name $VIRTUAL_NETWORK_DEPLOYMENT_NAME \
 --subscription $SUBSCRIPTION_ID --json || exit 1
 
-azure group deployment show --resource-group $RESOURCE_GROUP_NAME --name $VIRTUAL_MACHINE_DEPLOYMENT_NAME \
+azure group deployment show --resource-group $RESOURCE_GROUP_NAME --name $LOAD_BALANCER_DEPLOYMENT_NAME \
 --subscription $SUBSCRIPTION_ID --json || exit 1
 
 azure group deployment show --resource-group $RESOURCE_GROUP_NAME --name $NETWORK_SECURITY_GROUP_DEPLOYMENT_NAME \

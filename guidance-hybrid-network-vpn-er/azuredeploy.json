@@ -21,11 +21,13 @@
     "templates": {
       "deployment": {
         "virtualNetwork": "[uri(parameters('templateRootUri'), 'templates/buildingBlocks/vnet-n-subnet/azuredeploy.json')]",
+        "expressRouteGateway": "[uri(parameters('templateRootUri'), 'templates/buildingBlocks/vpn-gateway-vpn-connection/azuredeploy.json')]",
         "virtualNetworkGateway": "[uri(parameters('templateRootUri'), 'templates/buildingBlocks/vpn-gateway-vpn-connection/azuredeploy.json')]"
       },
       "parameter": {
-        "virtualNetwork": "[uri(parameters('parameterRootUri'), 'guidance-hybrid-network-er/Parameters/virtualNetwork.parameters.json')]",
-        "virtualNetworkGateway": "[uri(parameters('parameterRootUri'), 'guidance-hybrid-network-er/Parameters/virtualNetworkGateway.parameters.json')]"
+        "virtualNetwork": "[uri(parameters('parameterRootUri'), 'guidance-hybrid-network-vpn-er/parameters/virtualNetwork.parameters.json')]",
+        "expressRouteGateway": "[uri(parameters('parameterRootUri'), 'guidance-hybrid-network-vpn-er/parameters/virtualNetworkGateway-expressRoute.parameters.json')]",
+        "virtualNetworkGateway": "[uri(parameters('parameterRootUri'), 'guidance-hybrid-network-vpn-er/parameters/virtualNetworkGateway-vpn.parameters.json')]"
       }
     }
   },
@@ -33,7 +35,7 @@
     {
       "type": "Microsoft.Resources/deployments",
       "apiVersion": "2015-01-01",
-      "name": "ra-hybrid-er-vnet-deployment",
+      "name": "ra-hybrid-vpn-er-vnet-deployment",
       "properties": {
         "mode": "Incremental",
         "templateLink": {
@@ -49,7 +51,24 @@
       "apiVersion": "2015-01-01",
       "name": "ra-hybrid-er-deployment",
       "dependsOn": [
-        "ra-hybrid-er-vnet-deployment"
+        "ra-hybrid-vpn-er-vnet-deployment"
+      ],
+      "properties": {
+        "mode": "Incremental",
+        "templateLink": {
+          "uri": "[variables('templates').deployment.expressRouteGateway]"
+        },
+        "parametersLink": {
+          "uri": "[variables('templates').parameter.expressRouteGateway]"
+        }
+      }
+    },
+    {
+      "type": "Microsoft.Resources/deployments",
+      "apiVersion": "2015-01-01",
+      "name": "ra-hybrid-vpn-deployment",
+      "dependsOn": [
+        "ra-hybrid-er-deployment"
       ],
       "properties": {
         "mode": "Incremental",

@@ -29,16 +29,16 @@ Write-Host
 $templateRootUri = New-Object System.Uri -ArgumentList @($templateRootUriString)
 
 $expressRouteCircuitTemplate = New-Object System.Uri -ArgumentList @($templateRootUri, "templates/resources/Microsoft.Network/expressRouteCircuits/expressRouteCircuit.json")
-$expressRouteCircuitParametersFile = [System.IO.Path]::Combine($PSScriptRoot, "..\Parameters\expressRouteCircuit.parameters.json")
+$expressRouteCircuitParametersFile = [System.IO.Path]::Combine($PSScriptRoot, "parameters\expressRouteCircuit.parameters.json")
 
 $virtualNetworkTemplate = New-Object System.Uri -ArgumentList @($templateRootUri, "templates/buildingBlocks/vnet-n-subnet/azuredeploy.json")
-$virtualNetworkParametersFile = [System.IO.Path]::Combine($PSScriptRoot, "..\Parameters\virtualNetwork.parameters.json")
+$virtualNetworkParametersFile = [System.IO.Path]::Combine($PSScriptRoot, "parameters\virtualNetwork.parameters.json")
 
 $expressRouteGatewayTemplate = New-Object System.Uri -ArgumentList @($templateRootUri, "templates/buildingBlocks/vpn-gateway-vpn-connection/azuredeploy.json")
-$expressRouteGatewayParametersFile = [System.IO.Path]::Combine($PSScriptRoot, "..\Parameters\virtualNetworkGateway-expressRoute.parameters.json")
+$expressRouteGatewayParametersFile = [System.IO.Path]::Combine($PSScriptRoot, "parameters\virtualNetworkGateway-expressRoute.parameters.json")
 
 $virtualNetworkGatewayTemplate = New-Object System.Uri -ArgumentList @($templateRootUri, "templates/buildingBlocks/vpn-gateway-vpn-connection/azuredeploy.json")
-$virtualNetworkGatewayParametersFile = [System.IO.Path]::Combine($PSScriptRoot, "..\Parameters\virtualNetworkGateway-vpn.parameters.json")
+$virtualNetworkGatewayParametersFile = [System.IO.Path]::Combine($PSScriptRoot, "parameters\virtualNetworkGateway-vpn.parameters.json")
 
 $resourceGroupName = "ra-hybrid-vpn-er-rg"
 # Login to Azure and select your subscription

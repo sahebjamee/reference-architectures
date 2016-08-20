@@ -23,7 +23,7 @@
         "expressRouteCircuit": "[uri(parameters('templateRootUri'), 'templates/resources/Microsoft.Network/expressRouteCircuits/expressRouteCircuit.json')]"
       },
       "parameter": {
-        "expressRouteCircuit": "[uri(parameters('parameterRootUri'), 'guidance-hybrid-network-vpn-er/Parameters/expressRouteCircuit.parameters.json')]"
+        "expressRouteCircuit": "[uri(parameters('parameterRootUri'), 'guidance-hybrid-network-er/parameters/expressRouteCircuit.parameters.json')]"
       }
     }
   },
@@ -31,7 +31,7 @@
     {
       "type": "Microsoft.Resources/deployments",
       "apiVersion": "2015-01-01",
-      "name": "ra-hybrid-vpn-er-circuit-deployment",
+      "name": "ra-hybrid-er-circuit-deployment",
       "properties": {
         "mode": "Incremental",
         "templateLink": {

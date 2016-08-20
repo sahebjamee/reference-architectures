@@ -102,19 +102,19 @@ echo
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 EXPRESS_ROUTE_CIRCUIT_TEMPLATE_URI="${TEMPLATE_ROOT_URI}templates/resources/Microsoft.Network/expressRouteCircuits/expressRouteCircuit.json"
-EXPRESS_ROUTE_CIRCUIT_PARAMETERS_PATH="${SCRIPT_DIR}/../Parameters/expressRouteCircuit.parameters.json"
+EXPRESS_ROUTE_CIRCUIT_PARAMETERS_PATH="${SCRIPT_DIR}/parameters/expressRouteCircuit.parameters.json"
 EXPRESS_ROUTE_CIRCUIT_DEPLOYMENT_NAME="ra-hybrid-vpn-er-circuit-deployment"
 
 VIRTUAL_NETWORK_TEMPLATE_URI="${TEMPLATE_ROOT_URI}templates/buildingBlocks/vnet-n-subnet/azuredeploy.json"
-VIRTUAL_NETWORK_PARAMETERS_PATH="${SCRIPT_DIR}/../Parameters/virtualNetwork.parameters.json"
+VIRTUAL_NETWORK_PARAMETERS_PATH="${SCRIPT_DIR}/parameters/virtualNetwork.parameters.json"
 VIRTUAL_NETWORK_DEPLOYMENT_NAME="ra-hybrid-vpn-er-vnet-deployment"
 
 EXPRESS_ROUTE_GATEWAY_TEMPLATE_URI="${TEMPLATE_ROOT_URI}templates/buildingBlocks/vpn-gateway-vpn-connection/azuredeploy.json"
-EXPRESS_ROUTE_GATEWAY_PARAMETERS_PATH="${SCRIPT_DIR}/../Parameters/virtualNetworkGateway-expressRoute.parameters.json"
+EXPRESS_ROUTE_GATEWAY_PARAMETERS_PATH="${SCRIPT_DIR}/parameters/virtualNetworkGateway-expressRoute.parameters.json"
 EXPRESS_ROUTE_GATEWAY_DEPLOYMENT_NAME="ra-hybrid-er-deployment"
 
 VIRTUAL_NETWORK_GATEWAY_TEMPLATE_URI="${TEMPLATE_ROOT_URI}templates/buildingBlocks/vpn-gateway-vpn-connection/azuredeploy.json"
-VIRTUAL_NETWORK_GATEWAY_PARAMETERS_PATH="${SCRIPT_DIR}/../Parameters/virtualNetworkGateway-vpn.parameters.json"
+VIRTUAL_NETWORK_GATEWAY_PARAMETERS_PATH="${SCRIPT_DIR}/parameters/virtualNetworkGateway-vpn.parameters.json"
 VIRTUAL_NETWORK_GATEWAY_DEPLOYMENT_NAME="ra-hybrid-vpn-deployment"
 
 azure config mode arm
