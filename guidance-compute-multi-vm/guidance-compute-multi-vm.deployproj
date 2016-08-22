@@ -25,21 +25,18 @@
   <Import Condition=" Exists('$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Deployment\1.1\DeploymentProject.targets') " Project="$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Deployment\1.1\DeploymentProject.targets" />
   <!-- vertag<:>end -->
   <ItemGroup>
-    <Folder Include="Templates\" />
-  </ItemGroup>
-  <ItemGroup>
+    <None Include="deploy-reference-architecture.sh" />
+    <None Include="Deploy-ReferenceArchitecture.ps1" />
     <None Include="Deployment.targets">
       <Visible>False</Visible>
     </None>
-    <Content Include="Templates\azuredeploy.json" />
-    <None Include="Parameters\linux\networkSecurityGroups.parameters.json" />
-    <None Include="Parameters\linux\virtualMachine.parameters.json" />
-    <None Include="Parameters\linux\virtualNetwork.parameters.json" />
-    <None Include="Parameters\windows\networkSecurityGroups.parameters.json" />
-    <None Include="Parameters\windows\virtualMachine.parameters.json" />
-    <None Include="Parameters\windows\virtualNetwork.parameters.json" />
-    <None Include="scripts\deploy-reference-architecture.ps1" />
-    <None Include="Scripts\deploy-reference-architecture.sh" />
+    <Content Include="azuredeploy.json" />
+    <None Include="parameters\linux\networkSecurityGroups.parameters.json" />
+    <None Include="parameters\linux\loadBalancer.parameters.json" />
+    <None Include="parameters\linux\virtualNetwork.parameters.json" />
+    <None Include="parameters\windows\networkSecurityGroups.parameters.json" />
+    <None Include="parameters\windows\loadBalancer.parameters.json" />
+    <None Include="parameters\windows\virtualNetwork.parameters.json" />
   </ItemGroup>
   <Target Name="GetReferenceAssemblyPaths" />
 </Project>

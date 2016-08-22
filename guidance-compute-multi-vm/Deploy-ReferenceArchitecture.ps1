@@ -1,4 +1,4 @@
-#
+﻿#
 # Deploy_ReferenceArchitecture.ps1
 #
 param(
@@ -8,7 +8,7 @@ param(
   $Location = "Central US",
   [Parameter(Mandatory=$false)]
   [ValidateSet("Windows", "Linux")]
-  $OSType = "Linux"
+  $OSType = "Windows"
 )
 
 $ErrorActionPreference = "Stop"
@@ -28,13 +28,15 @@ Write-Host
 
 $templateRootUri = New-Object System.Uri -ArgumentList @($templateRootUriString)
 $virtualNetworkTemplate = New-Object System.Uri -ArgumentList @($templateRootUri, "templates/buildingBlocks/vnet-n-subnet/azuredeploy.json")
-$virtualMachineTemplate = New-Object System.Uri -ArgumentList @($templateRootUri, "templates/buildingBlocks/multi-vm-n-nic-m-storage/azuredeploy.json")
+$virtualMachineTemplate = New-Object System.Uri -ArgumentList @($templateRootUri, "templates/buildingBlocks/loadBalancer-backend-n-vm/azuredeploy.json")
 $networkSecurityGroupTemplate = New-Object System.Uri -ArgumentList @($templateRootUri, "templates/buildingBlocks/networkSecurityGroups/azuredeploy.json")
-$virtualNetworkParametersFile = [System.IO.Path]::Combine($PSScriptRoot, "..\Parameters", $OSType.ToLower(), "virtualNetwork.parameters.json")
-$virtualMachineParametersFile = [System.IO.Path]::Combine($PSScriptRoot, "..\Parameters", $OSType.ToLower(), "virtualMachine.parameters.json")
-$networkSecurityGroupParametersFile = [System.IO.Path]::Combine($PSScriptRoot, "..\Parameters", $OSType.ToLower(), "networkSecurityGroups.parameters.json")
 
-$resourceGroupName = "ra-single-vm-rg"
+$virtualNetworkParametersFile = [System.IO.Path]::Combine($PSScriptRoot, "parameters", $OSType.ToLower(), "virtualNetwork.parameters.json")
+$virtualMachineParametersFile = [System.IO.Path]::Combine($PSScriptRoot, "parameters", $OSType.ToLower(), "loadBalancer.parameters.json")
+$networkSecurityGroupParametersFile = [System.IO.Path]::Combine($PSScriptRoot, "parameters", $OSType.ToLower(), "networkSecurityGroups.parameters.json")
+
+$resourceGroupName = "ra-multi-vm-rg"
+
 # Login to Azure and select your subscription
 Login-AzureRmAccount -SubscriptionId $SubscriptionId | Out-Null
 
@@ -42,13 +44,13 @@ Login-AzureRmAccount -SubscriptionId $SubscriptionId | Out-Null
 $resourceGroup = New-AzureRmResourceGroup -Name $resourceGroupName -Location $Location
 
 Write-Host "Deploying virtual network..."
-New-AzureRmResourceGroupDeployment -Name "ra-single-vm-vnet-deployment" -ResourceGroupName $resourceGroup.ResourceGroupName `
+New-AzureRmResourceGroupDeployment -Name "ra-multi-vm-vnet-deployment" -ResourceGroupName $resourceGroup.ResourceGroupName `
     -TemplateUri $virtualNetworkTemplate.AbsoluteUri -TemplateParameterFile $virtualNetworkParametersFile
 
-Write-Host "Deploying virtual machine..."
-New-AzureRmResourceGroupDeployment -Name "ra-single-vm-deployment" -ResourceGroupName $resourceGroup.ResourceGroupName `
+Write-Host "Deploying load balancer..."
+New-AzureRmResourceGroupDeployment -Name "ra-multi-vm-lb-deployment" -ResourceGroupName $resourceGroup.ResourceGroupName `
     -TemplateUri $virtualMachineTemplate.AbsoluteUri -TemplateParameterFile $virtualMachineParametersFile
 
-Write-Host "Deploying network security groups..."
-New-AzureRmResourceGroupDeployment -Name "ra-single-vm-nsg-deployment" -ResourceGroupName $resourceGroup.ResourceGroupName `
+Write-Host "Deploying network security group..."
+New-AzureRmResourceGroupDeployment -Name "ra-multi-vm-nsg-deployment" -ResourceGroupName $resourceGroup.ResourceGroupName `
     -TemplateUri $networkSecurityGroupTemplate.AbsoluteUri -TemplateParameterFile $networkSecurityGroupParametersFile

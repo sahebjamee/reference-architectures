@@ -4,19 +4,26 @@
   "parameters": {
     "templateRootUri": {
       "type": "string",
-      "defaultValue": "https://raw.githubusercontent.com/mspnp/arm-building-blocks/master/",
+      "defaultValue": "https://raw.githubusercontent.com/mspnp/template-building-blocks/master/",
       "metadata": {
         "description": "Root path for templates"
+      }
+    },
+    "parameterRootUri": {
+      "type": "string",
+      "defaultValue": "https://raw.githubusercontent.com/mspnp/reference-architectures/master/",
+      "metadata": {
+        "decription": "Root path for parameters"
       }
     }
   },
   "variables": {
     "templates": {
       "deployment": {
-        "expressRouteCircuit": "[uri(parameters('templateRootUri'), 'ARMBuildingBlocks/Templates/resources/Microsoft.Network/expressRouteCircuits/expressRouteCircuit.json')]"
+        "expressRouteCircuit": "[uri(parameters('templateRootUri'), 'templates/resources/Microsoft.Network/expressRouteCircuits/expressRouteCircuit.json')]"
       },
       "parameter": {
-        "expressRouteCircuit": "[uri(parameters('templateRootUri'), 'guidance-hybrid-network-er/Parameters/expressRouteCircuit.parameters.json')]"
+        "expressRouteCircuit": "[uri(parameters('parameterRootUri'), 'guidance-hybrid-network-er/parameters/expressRouteCircuit.parameters.json')]"
       }
     }
   },

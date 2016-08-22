@@ -1,10 +1,10 @@
 #!/bin/bash
 
-RESOURCE_GROUP_NAME="ra-hybrid-vpn-er-rg"
+RESOURCE_GROUP_NAME="ra-hybrid-er-rg"
 LOCATION="centralus"
 MODE=""
 
-TEMPLATE_ROOT_URI=${TEMPLATE_ROOT_URI:="https://raw.githubusercontent.com/mspnp/arm-building-blocks/master/"}
+TEMPLATE_ROOT_URI=${TEMPLATE_ROOT_URI:="https://raw.githubusercontent.com/mspnp/template-building-blocks/master/"}
 # Make sure we have a trailing slash
 [[ "${TEMPLATE_ROOT_URI}" != */ ]] && TEMPLATE_ROOT_URI="${TEMPLATE_ROOT_URI}/"
 
@@ -101,25 +101,21 @@ echo
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
-EXPRESS_ROUTE_CIRCUIT_TEMPLATE_URI="${TEMPLATE_ROOT_URI}ARMBuildingBlocks/Templates/resources/Microsoft.Network/expressRouteCircuits/expressRouteCircuit.json"
-EXPRESS_ROUTE_CIRCUIT_PARAMETERS_PATH="${SCRIPT_DIR}/../Parameters/expressRouteCircuit.parameters.json"
-EXPRESS_ROUTE_CIRCUIT_DEPLOYMENT_NAME="ra-hybrid-vpn-er-circuit-deployment"
+EXPRESS_ROUTE_CIRCUIT_TEMPLATE_URI="${TEMPLATE_ROOT_URI}templates/resources/Microsoft.Network/expressRouteCircuits/expressRouteCircuit.json"
+EXPRESS_ROUTE_CIRCUIT_PARAMETERS_PATH="${SCRIPT_DIR}/parameters/expressRouteCircuit.parameters.json"
+EXPRESS_ROUTE_CIRCUIT_DEPLOYMENT_NAME="ra-hybrid-er-circuit-deployment"
 
-VIRTUAL_NETWORK_TEMPLATE_URI="${TEMPLATE_ROOT_URI}ARMBuildingBlocks/Templates/buildingBlocks/vnet-n-subnet/azuredeploy.json"
-VIRTUAL_NETWORK_PARAMETERS_PATH="${SCRIPT_DIR}/../Parameters/virtualNetwork.parameters.json"
-VIRTUAL_NETWORK_DEPLOYMENT_NAME="ra-hybrid-vpn-er-vnet-deployment"
+VIRTUAL_NETWORK_TEMPLATE_URI="${TEMPLATE_ROOT_URI}templates/buildingBlocks/vnet-n-subnet/azuredeploy.json"
+VIRTUAL_NETWORK_PARAMETERS_PATH="${SCRIPT_DIR}/parameters/virtualNetwork.parameters.json"
+VIRTUAL_NETWORK_DEPLOYMENT_NAME="ra-hybrid-er-vnet-deployment"
 
-EXPRESS_ROUTE_GATEWAY_TEMPLATE_URI="${TEMPLATE_ROOT_URI}ARMBuildingBlocks/Templates/buildingBlocks/vpn-gateway-vpn-connection/azuredeploy.json"
-EXPRESS_ROUTE_GATEWAY_PARAMETERS_PATH="${SCRIPT_DIR}/../Parameters/virtualNetworkGateway-expressRoute.parameters.json"
-EXPRESS_ROUTE_GATEWAY_DEPLOYMENT_NAME="ra-hybrid-er-deployment"
-
-VIRTUAL_NETWORK_GATEWAY_TEMPLATE_URI="${TEMPLATE_ROOT_URI}ARMBuildingBlocks/Templates/buildingBlocks/vpn-gateway-vpn-connection/azuredeploy.json"
-VIRTUAL_NETWORK_GATEWAY_PARAMETERS_PATH="${SCRIPT_DIR}/../Parameters/virtualNetworkGateway-vpn.parameters.json"
-VIRTUAL_NETWORK_GATEWAY_DEPLOYMENT_NAME="ra-hybrid-vpn-deployment"
+VIRTUAL_NETWORK_GATEWAY_TEMPLATE_URI="${TEMPLATE_ROOT_URI}templates/buildingBlocks/vpn-gateway-vpn-connection/azuredeploy.json"
+VIRTUAL_NETWORK_GATEWAY_PARAMETERS_PATH="${SCRIPT_DIR}/parameters/virtualNetworkGateway.parameters.json"
+VIRTUAL_NETWORK_GATEWAY_DEPLOYMENT_NAME="ra-hybrid-er-gateway-deployment"
 
 azure config mode arm
 
-if ! RESOURCE_GROUP_OUTPUT=$(azure group show --name $RESOURCE_GROUP_NAME --subscription $SUBSCRIPTION_ID --json)
+if ! RESOURCE_GROUP_OUTPUT=$(azure group show --name $RESOURCE_GROUP_NAME --subscription $SUBSCRIPTION_ID --json 2> /dev/null)
 then
   # The resource group doesn't exist, so create the resource group and save the output for later.
   RESOURCE_GROUP_OUTPUT=$(azure group create --name $RESOURCE_GROUP_NAME --location $LOCATION --subscription $SUBSCRIPTION_ID --json) || exit 1
@@ -149,11 +145,6 @@ then
   --template-uri $VIRTUAL_NETWORK_TEMPLATE_URI --parameters-file $VIRTUAL_NETWORK_PARAMETERS_PATH \
   --subscription $SUBSCRIPTION_ID || exit 1
 
-  echo "Deploying expressroute gateway..."
-  azure group deployment create --resource-group $RESOURCE_GROUP_NAME --name $EXPRESS_ROUTE_GATEWAY_DEPLOYMENT_NAME \
-  --template-uri $EXPRESS_ROUTE_GATEWAY_TEMPLATE_URI --parameters-file $EXPRESS_ROUTE_GATEWAY_PARAMETERS_PATH \
-  --subscription $SUBSCRIPTION_ID || exit 1
-
   echo "Deploying virtual network gateway..."
   azure group deployment create --resource-group $RESOURCE_GROUP_NAME --name $VIRTUAL_NETWORK_GATEWAY_DEPLOYMENT_NAME \
   --template-uri $VIRTUAL_NETWORK_GATEWAY_TEMPLATE_URI --parameters-file $VIRTUAL_NETWORK_GATEWAY_PARAMETERS_PATH \
@@ -165,9 +156,6 @@ then
   echo $RESOURCE_GROUP_OUTPUT
 
   azure group deployment show --resource-group $RESOURCE_GROUP_NAME --name $VIRTUAL_NETWORK_DEPLOYMENT_NAME \
-  --subscription $SUBSCRIPTION_ID --json || exit 1
-
-  azure group deployment show --resource-group $RESOURCE_GROUP_NAME --name $EXPRESS_ROUTE_GATEWAY_DEPLOYMENT_NAME \
   --subscription $SUBSCRIPTION_ID --json || exit 1
 
   azure group deployment show --resource-group $RESOURCE_GROUP_NAME --name $VIRTUAL_NETWORK_GATEWAY_DEPLOYMENT_NAME \

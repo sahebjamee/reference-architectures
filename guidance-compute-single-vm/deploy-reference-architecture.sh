@@ -103,15 +103,15 @@ echo
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 VIRTUAL_NETWORK_TEMPLATE_URI="${TEMPLATE_ROOT_URI}templates/buildingBlocks/vnet-n-subnet/azuredeploy.json"
-VIRTUAL_NETWORK_PARAMETERS_PATH="${SCRIPT_DIR}/../Parameters/${OS_TYPE}/virtualNetwork.parameters.json"
+VIRTUAL_NETWORK_PARAMETERS_PATH="${SCRIPT_DIR}/parameters/${OS_TYPE}/virtualNetwork.parameters.json"
 VIRTUAL_NETWORK_DEPLOYMENT_NAME="ra-single-vm-vnet-deployment"
 
 VIRTUAL_MACHINE_TEMPLATE_URI="${TEMPLATE_ROOT_URI}templates/buildingBlocks/multi-vm-n-nic-m-storage/azuredeploy.json"
-VIRTUAL_MACHINE_PARAMETERS_PATH="${SCRIPT_DIR}/../Parameters/${OS_TYPE}/virtualMachine.parameters.json"
+VIRTUAL_MACHINE_PARAMETERS_PATH="${SCRIPT_DIR}/parameters/${OS_TYPE}/virtualMachine.parameters.json"
 VIRTUAL_MACHINE_DEPLOYMENT_NAME="ra-single-vm-deployment"
 
 NETWORK_SECURITY_GROUP_TEMPLATE_URI="${TEMPLATE_ROOT_URI}templates/buildingBlocks/networkSecurityGroups/azuredeploy.json"
-NETWORK_SECURITY_GROUP_PARAMETERS_PATH="${SCRIPT_DIR}/../Parameters/${OS_TYPE}/networkSecurityGroups.parameters.json"
+NETWORK_SECURITY_GROUP_PARAMETERS_PATH="${SCRIPT_DIR}/parameters/${OS_TYPE}/networkSecurityGroups.parameters.json"
 NETWORK_SECURITY_GROUP_DEPLOYMENT_NAME="ra-single-vm-nsg-deployment"
 
 azure config mode arm

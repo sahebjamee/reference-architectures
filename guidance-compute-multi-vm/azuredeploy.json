@@ -1,0 +1,98 @@
+﻿{
+  "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "templateRootUri": {
+      "type": "string",
+      "defaultValue": "https://raw.githubusercontent.com/mspnp/template-building-blocks/master/",
+      "metadata": {
+        "description": "Root path for templates"
+      }
+    },
+    "parameterRootUri": {
+      "type": "string",
+      "defaultValue": "https://raw.githubusercontent.com/mspnp/reference-architectures/master/",
+      "metadata": {
+        "decription": "Root path for parameters"
+      }
+    },
+    "osType": {
+      "type": "string",
+      "allowedValues": [
+        "windows",
+        "linux"
+      ],
+      "defaultValue": "linux",
+      "metadata": {
+        "description": "Relative path decider for the template parameters."
+      }
+    }
+  },
+  "variables": {
+    "templates": {
+      "deployment": {
+        "virtualNetwork": "[concat(parameters('templateRootUri'), 'templates/buildingBlocks/vnet-n-subnet/azuredeploy.json')]",
+        "loadBalancer": "[concat(parameters('templateRootUri'), 'templates/buildingBlocks/loadBalancer-backend-n-vm/azuredeploy.json')]",
+        "networkSecurityGroup": "[concat(parameters('templateRootUri'), 'templates/buildingBlocks/networkSecurityGroups/azuredeploy.json')]"
+      },
+      "parameter": {
+        "virtualNetwork": "[concat(parameters('parameterRootUri'), 'guidance-compute-multi-vm/parameters/', parameters('osType'), '/virtualNetwork.parameters.json')]",
+        "loadBalancer": "[concat(parameters('parameterRootUri'), 'guidance-compute-multi-vm/parameters/', parameters('osType'), '/loadBalancer.parameters.json')]",
+        "networkSecurityGroup": "[concat(parameters('parameterRootUri'), 'guidance-compute-multi-vm/parameters/', parameters('osType'), '/networkSecurityGroups.parameters.json')]"
+      }
+    }
+  },
+  "resources": [
+    {
+      "type": "Microsoft.Resources/deployments",
+      "apiVersion": "2015-01-01",
+      "name": "ra-multi-vm-vnet-deployment",
+      "properties": {
+        "mode": "Incremental",
+        "templateLink": {
+          "uri": "[variables('templates').deployment.virtualNetwork]"
+        },
+        "parametersLink": {
+          "uri": "[variables('templates').parameter.virtualNetwork]"
+        }
+      }
+    },
+    {
+      "type": "Microsoft.Resources/deployments",
+      "apiVersion": "2015-01-01",
+      "name": "ra-multi-vm-lb-deployment",
+      "dependsOn": [
+        "ra-multi-vm-vnet-deployment"
+      ],
+      "properties": {
+        "mode": "Incremental",
+        "templateLink": {
+          "uri": "[variables('templates').deployment.loadBalancer]"
+        },
+        "parametersLink": {
+          "uri": "[variables('templates').parameter.loadBalancer]"
+        }
+      }
+    },
+    {
+      "type": "Microsoft.Resources/deployments",
+      "apiVersion": "2015-01-01",
+      "name": "ra-multi-vm-nsg-deployment",
+      "dependsOn": [
+        "ra-multi-vm-lb-deployment"
+      ],
+      "properties": {
+        "mode": "Incremental",
+        "templateLink": {
+          "uri": "[variables('templates').deployment.networkSecurityGroup]"
+        },
+        "parametersLink": {
+          "uri": "[variables('templates').parameter.networkSecurityGroup]"
+        }
+      }
+    }
+  ],
+  "outputs": {
+  }
+}
+
