@@ -38,7 +38,7 @@
       },
       "parameter": {
         "virtualNetwork": "[concat(parameters('parameterRootUri'), 'guidance-compute-n-tier/parameters/', parameters('osType'), '/virtualNetwork.parameters.json')]",
-        "networkSecurityGroup": "[concat(parameters('parameterRootUri'), 'guidance-compute-n-tier/parameters/', parameters('osType'), '/networkSecurityGroup.parameters.json')]",
+        "networkSecurityGroup": "[concat(parameters('parameterRootUri'), 'guidance-compute-n-tier/parameters/', parameters('osType'), '/networkSecurityGroups.parameters.json')]",
         "webTier": "[concat(parameters('parameterRootUri'), 'guidance-compute-n-tier/parameters/', parameters('osType'), '/webTier.parameters.json')]",
         "dataTier": "[concat(parameters('parameterRootUri'), 'guidance-compute-n-tier/parameters/', parameters('osType'), '/dataTier.parameters.json')]",
         "businessTier": "[concat(parameters('parameterRootUri'), 'guidance-compute-n-tier/parameters/', parameters('osType'), '/businessTier.parameters.json')]",
