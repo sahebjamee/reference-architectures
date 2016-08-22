@@ -43,7 +43,8 @@
         "availabilitySet": {
           "useExistingAvailabilitySet": "No",
           "name": "ra-multi-vm-as"
-        }
+        },
+        "extensions": [ ]
       }
     },
     "loadBalancerSettings": {
