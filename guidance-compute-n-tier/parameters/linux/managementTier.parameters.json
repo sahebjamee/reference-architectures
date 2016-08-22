@@ -43,7 +43,8 @@
         "availabilitySet": {
           "useExistingAvailabilitySet": "No",
           "name": ""
-        }
+        },
+        "extensions": [ ]
       }
     },
     "virtualNetworkSettings": {
