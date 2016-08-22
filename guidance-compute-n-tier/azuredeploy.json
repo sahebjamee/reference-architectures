@@ -2,36 +2,47 @@
   "$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
   "contentVersion": "1.0.0.0",
   "parameters": {
+    "templateRootUri": {
+      "type": "string",
+      "defaultValue": "https://raw.githubusercontent.com/mspnp/template-building-blocks/master/",
+      "metadata": {
+        "description": "Root path for templates"
+      }
+    },
+    "parameterRootUri": {
+      "type": "string",
+      "defaultValue": "https://raw.githubusercontent.com/mspnp/reference-architectures/master/",
+      "metadata": {
+        "decription": "Root path for parameters"
+      }
+    },
     "osType": {
       "type": "string",
       "allowedValues": [
         "windows",
         "linux"
       ],
-      "defaultValue": "windows",
+      "defaultValue": "linux",
       "metadata": {
         "description": "Relative path decider for the template parameters."
       }
     }
   },
   "variables": {
-    "templateRootUri": "https://raw.githubusercontent.com/mspnp/template-building-blocks/master/",
-    "parameterRootUri": "https://raw.githubusercontent.com/mspnp/reference-architectures/master/",
     "templates": {
       "deployment": {
-        "lb": "[concat(variables('templateRootUri'), 'templates/buildingBlocks/loadBalancer-backend-n-vm/azuredeploy.json')]",
-        "vnet": "[concat(variables('templateRootUri'), 'templates/buildingBlocks/vnet-n-subnet/azuredeploy.json')]",
-        "vm": "[concat(variables('templateRootUri'), 'templates/buildingBlocks/multi-vm-n-nic-m-storage/azuredeploy.json')]",
-        "nsg": "[concat(variables('templateRootUri'), 'templates/buildingBlocks/networkSecurityGroups/azuredeploy.json')]"
+        "loadBalancer": "[concat(parameters('templateRootUri'), 'templates/buildingBlocks/loadBalancer-backend-n-vm/azuredeploy.json')]",
+        "virtualNetwork": "[concat(parameters('templateRootUri'), 'templates/buildingBlocks/vnet-n-subnet/azuredeploy.json')]",
+        "virtualMachine": "[concat(parameters('templateRootUri'), 'templates/buildingBlocks/multi-vm-n-nic-m-storage/azuredeploy.json')]",
+        "networkSecurityGroup": "[concat(parameters('templateRootUri'), 'templates/buildingBlocks/networkSecurityGroups/azuredeploy.json')]"
       },
       "parameter": {
-        "vnet": "[concat(variables('parameterRootUri'), 'guidance-compute-n-tier/parameters/', parameters('osType'), '/virtualNetwork.parameters.json')]",
-        "nsg": "[concat(variables('parameterRootUri'), 'guidance-compute-n-tier/parameters/', parameters('osType'), '/networkSecurityGroup.parameters.json')]",
-        "lb": "[concat(variables('parameterRootUri'), 'guidance-compute-n-tier/parameters/', parameters('osType'), '/virtualMachine.parameters.json')]",
-        "webTier": "[concat(variables('parameterRootUri'), 'guidance-compute-n-tier/parameters/', parameters('osType'), '/webTier.parameters.json')]",
-        "dataTier": "[concat(variables('parameterRootUri'), 'guidance-compute-n-tier/parameters/', parameters('osType'), '/dataTier.parameters.json')]",
-        "businessTier": "[concat(variables('parameterRootUri'), 'guidance-compute-n-tier/parameters/', parameters('osType'), '/businessTier.parameters.json')]",
-        "managementTier": "[concat(variables('parameterRootUri'), 'guidance-compute-n-tier/parameters/', parameters('osType'), '/managementTier.parameters.json')]"
+        "virtualNetwork": "[concat(parameters('parameterRootUri'), 'guidance-compute-n-tier/parameters/', parameters('osType'), '/virtualNetwork.parameters.json')]",
+        "networkSecurityGroup": "[concat(parameters('parameterRootUri'), 'guidance-compute-n-tier/parameters/', parameters('osType'), '/networkSecurityGroup.parameters.json')]",
+        "webTier": "[concat(parameters('parameterRootUri'), 'guidance-compute-n-tier/parameters/', parameters('osType'), '/webTier.parameters.json')]",
+        "dataTier": "[concat(parameters('parameterRootUri'), 'guidance-compute-n-tier/parameters/', parameters('osType'), '/dataTier.parameters.json')]",
+        "businessTier": "[concat(parameters('parameterRootUri'), 'guidance-compute-n-tier/parameters/', parameters('osType'), '/businessTier.parameters.json')]",
+        "managementTier": "[concat(parameters('parameterRootUri'), 'guidance-compute-n-tier/parameters/', parameters('osType'), '/managementTier.parameters.json')]"
       }
     }
   },
@@ -43,10 +54,10 @@
       "properties": {
         "mode": "Incremental",
         "templateLink": {
-          "uri": "[variables('templates').deployment.vnet]"
+          "uri": "[variables('templates').deployment.virtualNetwork]"
         },
         "parametersLink": {
-          "uri": "[variables('templates').parameter.vnet]",
+          "uri": "[variables('templates').parameter.virtualNetwork]",
           "contentVersion": "1.0.0.0"
         }
       }
@@ -61,7 +72,7 @@
       "properties": {
         "mode": "Incremental",
         "templateLink": {
-          "uri": "[variables('templates').deployment.lb]"
+          "uri": "[variables('templates').deployment.loadBalancer]"
         },
         "parametersLink": {
           "uri": "[variables('templates').parameter.webTier]",
@@ -79,7 +90,7 @@
       "properties": {
         "mode": "Incremental",
         "templateLink": {
-          "uri": "[variables('templates').deployment.lb]"
+          "uri": "[variables('templates').deployment.loadBalancer]"
         },
         "parametersLink": {
           "uri": "[variables('templates').parameter.businessTier]",
@@ -97,7 +108,7 @@
       "properties": {
         "mode": "Incremental",
         "templateLink": {
-          "uri": "[variables('templates').deployment.lb]"
+          "uri": "[variables('templates').deployment.loadBalancer]"
         },
         "parametersLink": {
           "uri": "[variables('templates').parameter.dataTier]",
@@ -115,7 +126,7 @@
       "properties": {
         "mode": "Incremental",
         "templateLink": {
-          "uri": "[variables('templates').deployment.vm]"
+          "uri": "[variables('templates').deployment.virtualMachine]"
         },
         "parametersLink": {
           "uri": "[variables('templates').parameter.managementTier]",
@@ -137,10 +148,10 @@
       "properties": {
         "mode": "Incremental",
         "templateLink": {
-          "uri": "[variables('templates').deployment.nsg]"
+          "uri": "[variables('templates').deployment.networkSecurityGroup]"
         },
         "parametersLink": {
-          "uri": "[variables('templates').parameter.nsg]",
+          "uri": "[variables('templates').parameter.networkSecurityGroup]",
           "contentVersion": "1.0.0.0"
         }
       }

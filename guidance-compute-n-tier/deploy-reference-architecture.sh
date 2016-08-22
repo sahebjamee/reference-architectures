@@ -103,28 +103,32 @@ echo
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
+echo
+echo "Using ${SCRIPT_DIR} to locate parameters"
+echo
+
 VIRTUAL_NETWORK_TEMPLATE_URI="${TEMPLATE_ROOT_URI}templates/buildingBlocks/vnet-n-subnet/azuredeploy.json"
-VIRTUAL_NETWORK_PARAMETERS_PATH="${SCRIPT_DIR}/../parameters/${OS_TYPE}/virtualNetwork.parameters.json"
+VIRTUAL_NETWORK_PARAMETERS_PATH="${SCRIPT_DIR}/parameters/${OS_TYPE}/virtualNetwork.parameters.json"
 VIRTUAL_NETWORK_DEPLOYMENT_NAME="ra-ntier-vnet-deployment"
 
 VIRTUAL_MACHINE_TEMPLATE_URI="${TEMPLATE_ROOT_URI}templates/buildingBlocks/multi-vm-n-nic-m-storage/azuredeploy.json"
 
-MGMT_TIER_PARAMETERS_PATH="${SCRIPT_DIR}/../parameters/${OS_TYPE}/managementTier.parameters.json"
+MGMT_TIER_PARAMETERS_PATH="${SCRIPT_DIR}/parameters/${OS_TYPE}/managementTier.parameters.json"
 MGMT_TIER_DEPLOYMENT_NAME="ra-ntier-mgmt-deployment"
 
 LOAD_BALANCER_TEMPLATE_URI="${TEMPLATE_ROOT_URI}templates/buildingBlocks/loadBalancer-backend-n-vm/azuredeploy.json"
 
-WEB_TIER_PARAMETERS_PATH="${SCRIPT_DIR}/../parameters/${OS_TYPE}/webTier.parameters.json"
+WEB_TIER_PARAMETERS_PATH="${SCRIPT_DIR}/parameters/${OS_TYPE}/webTier.parameters.json"
 WEB_TIER_DEPLOYMENT_NAME="ra-ntier-web-deployment"
 
-BIZ_TIER_PARAMETERS_PATH="${SCRIPT_DIR}/../parameters/${OS_TYPE}/businessTier.parameters.json"
+BIZ_TIER_PARAMETERS_PATH="${SCRIPT_DIR}/parameters/${OS_TYPE}/businessTier.parameters.json"
 BIZ_TIER_DEPLOYMENT_NAME="ra-ntier-biz-deployment"
 
-DATA_TIER_PARAMETERS_PATH="${SCRIPT_DIR}/../parameters/${OS_TYPE}/dataTier.parameters.json"
+DATA_TIER_PARAMETERS_PATH="${SCRIPT_DIR}/parameters/${OS_TYPE}/dataTier.parameters.json"
 DATA_TIER_DEPLOYMENT_NAME="ra-ntier-data-deployment"
 
 NETWORK_SECURITY_GROUP_TEMPLATE_URI="${TEMPLATE_ROOT_URI}templates/buildingBlocks/networkSecurityGroups/azuredeploy.json"
-NETWORK_SECURITY_GROUP_PARAMETERS_PATH="${SCRIPT_DIR}/../parameters/${OS_TYPE}/networkSecurityGroups.parameters.json"
+NETWORK_SECURITY_GROUP_PARAMETERS_PATH="${SCRIPT_DIR}/parameters/${OS_TYPE}/networkSecurityGroups.parameters.json"
 NETWORK_SECURITY_GROUP_DEPLOYMENT_NAME="ra-ntier-nsg-deployment"
 
 azure config mode arm

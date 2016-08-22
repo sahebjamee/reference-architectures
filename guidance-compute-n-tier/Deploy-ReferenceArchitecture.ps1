@@ -26,6 +26,10 @@ Write-Host
 Write-Host "Using $templateRootUriString to locate templates"
 Write-Host
 
+Write-Host
+Write-Host "Using $PSScriptRoot to locate parameters"
+Write-Host
+
 # Deployer templates for respective resources
 $templateRootUri = New-Object System.Uri -ArgumentList @($templateRootUriString)
 $virtualNetworkTemplate = New-Object System.Uri -ArgumentList @($templateRootUri, 'templates/buildingBlocks/vnet-n-subnet/azuredeploy.json')
@@ -34,12 +38,12 @@ $virtualMachineTemplate = New-Object System.Uri -ArgumentList @($templateRootUri
 $networkSecurityGroupTemplate = New-Object System.Uri -ArgumentList @($templateRootUri, 'templates/buildingBlocks/networkSecurityGroups/azuredeploy.json')
 
 # Template parameters for respective deployments
-$virtualNetworkParametersFile = [System.IO.Path]::Combine($PSScriptRoot, '..\parameters', $OSType.ToLower(), 'virtualNetwork.parameters.json')
-$businessTierParametersFile = [System.IO.Path]::Combine($PSScriptRoot, '..\parameters', $OSType.ToLower(), 'businessTier.parameters.json')
-$dataTierParametersFile = [System.IO.Path]::Combine($PSScriptRoot, '..\parameters', $OSType.ToLower(), 'dataTier.parameters.json')
-$webTierParametersFile = [System.IO.Path]::Combine($PSScriptRoot, '..\parameters', $OSType.ToLower(), 'webTier.parameters.json')
-$managementTierParametersFile = [System.IO.Path]::Combine($PSScriptRoot, '..\parameters', $OSType.ToLower(), 'managementTier.parameters.json')
-$networkSecurityGroupParametersFile = [System.IO.Path]::Combine($PSScriptRoot, '..\parameters', $OSType.ToLower(), 'networkSecurityGroups.parameters.json')
+$virtualNetworkParametersFile = [System.IO.Path]::Combine($PSScriptRoot, 'parameters', $OSType.ToLower(), 'virtualNetwork.parameters.json')
+$businessTierParametersFile = [System.IO.Path]::Combine($PSScriptRoot, 'parameters', $OSType.ToLower(), 'businessTier.parameters.json')
+$dataTierParametersFile = [System.IO.Path]::Combine($PSScriptRoot, 'parameters', $OSType.ToLower(), 'dataTier.parameters.json')
+$webTierParametersFile = [System.IO.Path]::Combine($PSScriptRoot, 'parameters', $OSType.ToLower(), 'webTier.parameters.json')
+$managementTierParametersFile = [System.IO.Path]::Combine($PSScriptRoot, 'parameters', $OSType.ToLower(), 'managementTier.parameters.json')
+$networkSecurityGroupParametersFile = [System.IO.Path]::Combine($PSScriptRoot, 'parameters', $OSType.ToLower(), 'networkSecurityGroups.parameters.json')
 
 $resourceGroupName = "ra-ntier-vm-rg"
 

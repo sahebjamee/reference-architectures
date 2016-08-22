@@ -82,7 +82,8 @@
         "availabilitySet": {
           "useExistingAvailabilitySet": "No",
           "name": "app1-web-as"
-        }
+        },
+        "extensions": [ ]
       }
     },
     "virtualNetworkSettings": {
