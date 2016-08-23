@@ -6,7 +6,7 @@
       "value": {
         "namePrefix": "ra-ad-onprem",
         "computerNamePrefix": "onprem",
-        "size": "Standard_DS1",
+        "size": "Standard_DS2_v2",
         "osType": "Windows",
         "adminUsername": "testuser",
         "adminPassword": "AweS0me@PW",
