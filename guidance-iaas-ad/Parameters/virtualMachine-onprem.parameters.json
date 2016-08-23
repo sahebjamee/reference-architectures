@@ -17,6 +17,7 @@
             "subnetName": "ra-ad-onprem-sn",
             "privateIPAllocationMethod": "Static",
             "startingIPAddress": "192.168.0.4",
+            "publicIPAllocationMethod": "Static",
             "enableIPForwarding": false,
             "dnsServers": [
             ],
