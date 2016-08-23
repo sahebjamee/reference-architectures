@@ -78,6 +78,7 @@
             "createOption": "Empty"
           }
         },
+        "extensions": [ ],
         "availabilitySet": {
           "useExistingAvailabilitySet": "No",
           "name": "app1-web-as"
