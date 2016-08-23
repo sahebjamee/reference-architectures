@@ -2,9 +2,49 @@
   "$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
   "contentVersion": "1.0.0.0",
   "parameters": {
+    "loadBalancerSettings": {
+      "value": {
+        "name": "app1-biz-ilb",
+        "frontendIPConfigurations": [
+          {
+            "name": "lb-fe-config1",
+            "loadBalancerType": "internal",
+            "internalLoadBalancerSettings": {
+              "privateIPAddress": "10.0.1.250",
+              "subnetName": "app1-biz-sn"
+            }
+          }
+        ],
+        "loadBalancingRules": [
+          {
+            "name": "lbr1",
+            "frontendPort": 80,
+            "backendPort": 80,
+            "protocol": "Tcp",
+            "backendPoolName": "lb-bep1",
+            "frontendIPConfigurationName": "lb-fe-config1"
+          }
+        ],
+        "probes": [
+          {
+            "name": "lbp1",
+            "port": 80,
+            "protocol": "Http",
+            "requestPath": "/"
+          }
+        ],
+        "backendPools": [
+          {
+            "name": "lb-bep1",
+            "nicIndex": 0
+          }
+        ],
+        "inboundNatRules": [ ]
+      }
+    },
     "virtualMachinesSettings": {
       "value": {
-        "namePrefix": "a0",
+        "namePrefix": "ra",
         "computerNamePrefix": "cn",
         "size": "Standard_DS1",
         "adminUsername": "testuser",
@@ -14,11 +54,10 @@
         "sshPublicKey": "",
         "nics": [
           {
-            "isPublic": "true",
+            "isPublic": "false",
             "isPrimary": "true",
-            "subnetName": "app1-mgmt-sn",
+            "subnetName": "app1-biz-sn",
             "privateIPAllocationMethod": "dynamic",
-            "publicIPAllocationMethod": "dynamic",
             "enableIPForwarding": false,
             "dnsServers": [ ]
           }
@@ -43,24 +82,22 @@
         "extensions": [ ],
         "availabilitySet": {
           "useExistingAvailabilitySet": "No",
-          "name": ""
-        }
+          "name": "app1-biz-as"
+        },
+        "extensions": [ ]
       }
     },
     "virtualNetworkSettings": {
       "value": {
-        "name": "app1-vnet",
-        "resourceGroup": "app1-dev-rg"
-      },
-      "metadata": {
-        "description": "Virtual network settings"
+        "name": "ra-vnet",
+        "resourceGroup": "ra-ntier-vm-rg"
       }
     },
     "buildingBlockSettings": {
       "value": {
         "storageAccountsCount": 1,
-        "vmCount": 1,
-        "vmStartIndex": 9
+        "vmCount": 3,
+        "vmStartIndex": 4
       }
     }
   }

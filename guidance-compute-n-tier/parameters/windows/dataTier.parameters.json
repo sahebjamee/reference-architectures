@@ -4,14 +4,14 @@
   "parameters": {
     "loadBalancerSettings": {
       "value": {
-        "name": "app1-biz-ilb",
+        "name": "app1-data-ilb",
         "frontendIPConfigurations": [
           {
-            "name": "lbfe1",
+            "name": "lb-fe-config1",
             "loadBalancerType": "internal",
             "internalLoadBalancerSettings": {
-              "privateIPAddress": "10.0.1.250",
-              "subnetName": "app1-biz-sn"
+              "privateIPAddress": "10.0.2.250",
+              "subnetName": "app1-data-sn"
             }
           }
         ],
@@ -22,7 +22,7 @@
             "backendPort": 80,
             "protocol": "Tcp",
             "backendPoolName": "lb-bep1",
-            "frontendIPConfigurationName": "lbfe1"
+            "frontendIPConfigurationName": "lb-fe-config1"
           }
         ],
         "probes": [
@@ -38,33 +38,34 @@
             "name": "lb-bep1",
             "nicIndex": 0
           }
-        ]
+        ],
+        "inboundNatRules": [ ]
       }
     },
     "virtualMachinesSettings": {
       "value": {
-        "namePrefix": "a0",
+        "namePrefix": "ra",
         "computerNamePrefix": "cn",
         "size": "Standard_DS1",
         "adminUsername": "testuser",
         "adminPassword": "AweS0me@PW",
-        "osType": "linux",
+        "osType": "windows",
         "osAuthenticationType": "password",
         "sshPublicKey": "",
         "nics": [
           {
             "isPublic": "false",
             "isPrimary": "true",
-            "subnetName": "app1-biz-sn",
+            "subnetName": "app1-data-sn",
             "privateIPAllocationMethod": "dynamic",
             "enableIPForwarding": false,
             "dnsServers": [ ]
           }
         ],
         "imageReference": {
-          "publisher": "RedHat",
-          "offer": "RHEL",
-          "sku": "7.2",
+          "publisher": "MicrosoftWindowsServer",
+          "offer": "WindowsServer",
+          "sku": "2012-R2-Datacenter",
           "version": "latest"
         },
         "dataDisks": {
@@ -81,24 +82,22 @@
         "extensions": [ ],
         "availabilitySet": {
           "useExistingAvailabilitySet": "No",
-          "name": "app1-biz-as"
-        }
+          "name": "app1-data-as"
+        },
+        "extensions": [ ]
       }
     },
     "virtualNetworkSettings": {
       "value": {
-        "name": "app1-vnet",
-        "resourceGroup": "app1-dev-rg"
-      },
-      "metadata": {
-        "description": "Virtual network settings"
+        "name": "ra-vnet",
+        "resourceGroup": "ra-ntier-vm-rg"
       }
     },
     "buildingBlockSettings": {
       "value": {
         "storageAccountsCount": 1,
-        "vmCount": 3,
-        "vmStartIndex": 4
+        "vmCount": 2,
+        "vmStartIndex": 7
       }
     }
   }

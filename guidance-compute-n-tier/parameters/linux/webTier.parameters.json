@@ -4,14 +4,14 @@
   "parameters": {
     "loadBalancerSettings": {
       "value": {
-        "name": "app1-data-ilb",
+        "name": "app1-web-lb",
         "frontendIPConfigurations": [
           {
-            "name": "lbfe1",
-            "loadBalancerType": "internal",
+            "name": "lb-fe-config1",
+            "loadBalancerType": "public",
             "internalLoadBalancerSettings": {
-              "privateIPAddress": "10.0.2.10",
-              "subnetName": "app1-data-sn"
+              "privateIPAddress": "10.0.0.250",
+              "subnetName": "app1-web-sn"
             }
           }
         ],
@@ -22,7 +22,7 @@
             "backendPort": 80,
             "protocol": "Tcp",
             "backendPoolName": "lb-bep1",
-            "frontendIPConfigurationName": "lbfe1"
+            "frontendIPConfigurationName": "lb-fe-config1"
           }
         ],
         "probes": [
@@ -38,12 +38,13 @@
             "name": "lb-bep1",
             "nicIndex": 0
           }
-        ]
+        ],
+        "inboundNatRules": [ ]
       }
     },
     "virtualMachinesSettings": {
       "value": {
-        "namePrefix": "a0",
+        "namePrefix": "ra",
         "computerNamePrefix": "cn",
         "size": "Standard_DS1",
         "adminUsername": "testuser",
@@ -55,17 +56,20 @@
           {
             "isPublic": "false",
             "isPrimary": "true",
-            "subnetName": "app1-data-sn",
+            "subnetName": "app1-web-sn",
             "privateIPAllocationMethod": "dynamic",
             "enableIPForwarding": false,
             "dnsServers": [ ]
           }
         ],
         "imageReference": {
-          "publisher": "RedHat",
-          "offer": "RHEL",
-          "sku": "7.2",
+          "publisher": "canonical",
+          "offer": "ubuntuserver",
+          "sku": "14.04.5-LTS",
           "version": "latest"
+        },
+        "osDisk": {
+          "caching": "ReadWrite"
         },
         "dataDisks": {
           "count": 1,
@@ -75,30 +79,25 @@
             "createOption": "Empty"
           }
         },
-        "osDisk": {
-          "caching": "ReadWrite"
-        },
         "extensions": [ ],
         "availabilitySet": {
           "useExistingAvailabilitySet": "No",
-          "name": "app1-data-as"
-        }
+          "name": "app1-web-as"
+        },
+        "extensions": [ ]
       }
     },
     "virtualNetworkSettings": {
       "value": {
-        "name": "app1-vnet",
-        "resourceGroup": "app1-dev-rg"
-      },
-      "metadata": {
-        "description": "Virtual network settings"
+        "name": "ra-vnet",
+        "resourceGroup": "ra-ntier-vm-rg"
       }
     },
     "buildingBlockSettings": {
       "value": {
         "storageAccountsCount": 1,
-        "vmCount": 2,
-        "vmStartIndex": 7
+        "vmCount": 3,
+        "vmStartIndex": 1
       }
     }
   }

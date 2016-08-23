@@ -4,11 +4,11 @@
   "parameters": {
     "virtualNetworkSettings": {
       "value": {
-        "name": "app1-vnet",
-        "resourceGroup": "app1-dev-rg"
-      }
+        "name": "ra-vnet",
+        "resourceGroup": "ra-ntier-vm-rg"
+	}
     },
-    "networkSecurityGroupSettings": {
+    "networkSecurityGroupsSettings": {
       "value": [
         {
           "name": "app1-biz-nsg",
@@ -126,10 +126,9 @@
         },
         {
           "name": "app1-mgmt-nsg",
-          "subnets": [
-            "app1-mgmt-sn"
-          ],
+          "subnets": [ ],
           "networkInterfaces": [
+            "ra-vm9-nic1"
           ],
           "securityRules": [
             {
