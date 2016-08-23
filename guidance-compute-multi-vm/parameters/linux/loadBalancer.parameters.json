@@ -24,8 +24,8 @@
           }
         ],
         "imageReference": {
-          "publisher": "canonical",
-          "offer": "ubuntuserver",
+          "publisher": "Canonical",
+          "offer": "UbuntuServer",
           "sku": "14.04.5-LTS",
           "version": "latest"
         },
