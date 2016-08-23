@@ -31,18 +31,18 @@
     <None Include="Deployment.targets">
       <Visible>False</Visible>
     </None>
-    <None Include="Parameters\linux\businessTier.parameters.json" />
-    <None Include="Parameters\linux\dataTier.parameters.json" />
-    <None Include="Parameters\linux\managementTier.parameters.json" />
-    <None Include="Parameters\linux\networkSecurityGroups.parameters.json" />
-    <None Include="Parameters\linux\virtualNetwork.parameters.json" />
-    <None Include="Parameters\linux\webTier.parameters.json" />
-    <None Include="Parameters\windows\businessTier.parameters.json" />
-    <None Include="Parameters\windows\dataTier.parameters.json" />
-    <None Include="Parameters\windows\managementTier.parameters.json" />
-    <None Include="Parameters\windows\networkSecurityGroups.parameters.json" />
-    <None Include="Parameters\windows\virtualNetwork.parameters.json" />
-    <None Include="Parameters\windows\webTier.parameters.json" />
+    <None Include="parameters\linux\businessTier.parameters.json" />
+    <None Include="parameters\linux\dataTier.parameters.json" />
+    <None Include="parameters\linux\managementTier.parameters.json" />
+    <None Include="parameters\linux\networkSecurityGroups.parameters.json" />
+    <None Include="parameters\linux\virtualNetwork.parameters.json" />
+    <None Include="parameters\linux\webTier.parameters.json" />
+    <None Include="parameters\windows\businessTier.parameters.json" />
+    <None Include="parameters\windows\dataTier.parameters.json" />
+    <None Include="parameters\windows\managementTier.parameters.json" />
+    <None Include="parameters\windows\networkSecurityGroups.parameters.json" />
+    <None Include="parameters\windows\virtualNetwork.parameters.json" />
+    <None Include="parameters\windows\webTier.parameters.json" />
   </ItemGroup>
   <Target Name="GetReferenceAssemblyPaths" />
 </Project>
