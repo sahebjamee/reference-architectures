@@ -37,7 +37,21 @@
         "osDisk": {
           "caching": "ReadWrite"
         },
-        "extensions": [ ],
+        "extensions": [
+          {
+            "name": "InstallRRAS",
+            "publisher": "Microsoft.Compute",
+            "type": "CustomScriptExtension",
+            "typeHandlerVersion": "1.8",
+            "settingsMapperUri": "https://raw.githubusercontent.com/mspnp/template-building-blocks/master/templates/resources/Microsoft.Compute/virtualMachines/extensions/vm-extension-passthrough-settings-mapper.json",
+            "properties": {
+              "fileUris": [
+                "[uri('https://raw.githubusercontent.com/mspnp/reference-architecture/andrew/ra-ad/guidance-iaas-ad/extensions/', 'rras.ps1')]"
+              ],
+              "commandToExecute": "powershell -ExecutionPolicy Unrestricted -File rras.ps1"
+            }
+          }
+        ],
         "availabilitySet": {
           "useExistingAvailabilitySet": "No",
           "name": ""

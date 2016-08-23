@@ -32,6 +32,8 @@
       <Visible>False</Visible>
     </None>
     <Content Include="Templates\azuredeploy.json" />
+    <None Include="extensions\adds-forest.ps1" />
+    <None Include="extensions\rras.ps1" />
     <None Include="Parameters\loadBalancer-adfs-proxy.parameters.json" />
     <None Include="Parameters\loadBalancer-adfs.parameters.json" />
     <None Include="Parameters\networkSecurityGroup-mgmt.parameters.json" />
