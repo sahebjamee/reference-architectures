@@ -4,9 +4,16 @@
   "parameters": {
     "templateRootUri": {
       "type": "string",
-      "defaultValue": "https://raw.githubusercontent.com/mspnp/arm-building-blocks/master/",
+      "defaultValue": "https://raw.githubusercontent.com/mspnp/template-building-blocks/master/",
       "metadata": {
         "description": "Root path for templates"
+      }
+    },
+    "parameterRootUri": {
+      "type": "string",
+      "defaultValue": "https://raw.githubusercontent.com/mspnp/reference-architectures/master/",
+      "metadata": {
+        "decription": "Root path for parameters"
       }
     }
   },
@@ -19,11 +26,11 @@
         "loadBalancer": "[uri(parameters('templateRootUri'), 'ARMBuildingBlocks/Templates/buildingBlocks/loadBalancer-backend-n-vm/azuredeploy.json')]"
       },
       "parameter": {
-        "virtualNetwork": "[uri(parameters('templateRootUri'), 'guidance-iaas-ad/Parameters/virtualNetwork.parameters.json')]",
-        "networkSecurityGroup": "[uri(parameters('templateRootUri'), 'guidance-iaas-ad/Parameters/networkSecurityGroup.parameters.json')]",
-        "jumpbox": "[uri(parameters('templateRootUri'), 'guidance-iaas-ad/Parameters/virtualMachine-jumpbox.parameters.json')]",
-        "adfsLoadBalancer": "[uri(parameters('templateRootUri'), 'guidance-iaas-ad/Parameters/loadBalancer-adfs.parameters.json')]",
-        "adfsProxyLoadBalancer": "[uri(parameters('templateRootUri'), 'guidance-iaas-ad/Parameters/loadBalancer-adfs-proxy.parameters.json')]"
+        "virtualNetwork": "[uri(parameters('parameterRootUri'), 'guidance-iaas-ad/Parameters/virtualNetwork.parameters.json')]",
+        "networkSecurityGroup": "[uri(parameters('parameterRootUri'), 'guidance-iaas-ad/Parameters/networkSecurityGroup.parameters.json')]",
+        "jumpbox": "[uri(parameters('parameterRootUri'), 'guidance-iaas-ad/Parameters/virtualMachine-jumpbox.parameters.json')]",
+        "adfsLoadBalancer": "[uri(parameters('parameterRootUri'), 'guidance-iaas-ad/Parameters/loadBalancer-adfs.parameters.json')]",
+        "adfsProxyLoadBalancer": "[uri(parameters('parameterRootUri'), 'guidance-iaas-ad/Parameters/loadBalancer-adfs-proxy.parameters.json')]"
       }
     }
   },

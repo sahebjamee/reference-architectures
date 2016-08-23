@@ -1,0 +1,22 @@
+﻿{
+  "$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "virtualNetworkSettings": {
+      "value": {
+        "name": "ra-ad-onprem-vnet",
+        "resourceGroup": "ra-ad-onprem-rg",
+        "addressPrefixes": [
+          "192.168.0.0/16"
+        ],
+        "subnets": [
+          {
+            "name": "ra-ad-onprem-sn",
+            "addressPrefix": "192.168.0.0/24"
+          }
+        ],
+        "dnsServers": [ ]
+      }
+    }
+  }
+}

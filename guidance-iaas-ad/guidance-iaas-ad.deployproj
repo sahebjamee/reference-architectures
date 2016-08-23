@@ -26,7 +26,6 @@
   <!-- vertag<:>end -->
   <ItemGroup>
     <Folder Include="Scripts\" />
-    <Folder Include="Templates\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Deployment.targets">
@@ -41,7 +40,10 @@
     <None Include="Parameters\networkSecurityGroup-ad.parameters.json" />
     <None Include="Parameters\networkSecurityGroup.parameters.json" />
     <None Include="Parameters\virtualMachine-jumpbox.parameters.json" />
+    <None Include="Parameters\virtualMachine-onprem.parameters.json" />
+    <None Include="Parameters\virtualNetwork-onprem.parameters.json" />
     <None Include="Parameters\virtualNetwork.parameters.json" />
+    <None Include="Templates\azuredeploy-onprem.json" />
   </ItemGroup>
   <Target Name="GetReferenceAssemblyPaths" />
 </Project>
