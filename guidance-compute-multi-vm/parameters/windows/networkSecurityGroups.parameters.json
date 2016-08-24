@@ -21,7 +21,7 @@
             {
               "name": "RDPAllow",
               "direction": "Inbound",
-              "priority": 100,
+              "priority": 1000,
               "sourceAddressPrefix": "*",
               "destinationAddressPrefix": "*",
               "sourcePortRange": "*",
